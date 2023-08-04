@@ -21,6 +21,9 @@ public class JobDAO {
 	
 	public boolean createJob(Job job) throws DAOException {
 
+		
+		
+		
 		try {
 			// Get connection
 			Connection connection = getConnection();
