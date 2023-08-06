@@ -2,15 +2,16 @@ package needsToBeDone.validation;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
+import needsToBeDone.*;
+import needsToBeDone.DAO.JobDAO;
+import needsToBeDone.DAO.exceptions.DAOException;
 import needsToBeDone.model.Job;
 import needsToBeDone.validation.exceptions.InvalidUserException;
 
 public class JobValidator {
 	public static boolean validateJob(Job job) throws InvalidUserException {
 
-		if (job != null && validateTitle(job.getTitle())
-				&& validateLocation(job.getLocation())) {
+		if (job != null && validateTitle(job.getTitle())&& validatePrice(job.getPrice()) && validateEmail(job.getEmail())) {
 			return true;
 		} else {
 			throw new InvalidUserException("Job details not valid");
@@ -25,7 +26,7 @@ public class JobValidator {
 		if (title == null)
 			return false;
 
-		String regex = "^[A-Za-z]\\w{2,20}$";
+		String regex = "^[A-Za-z ]+$";
 		Pattern p = Pattern.compile(regex);
 		Matcher m = p.matcher(title);
 		match = m.matches();
@@ -37,79 +38,57 @@ public class JobValidator {
 
 		return match;
 	}
-
-//	public static boolean validateQualification(String data) {
-//		boolean match = false;
-//
-//		if (data == null)
-//			return false;
-//
-//		String pattern_string = "^(?=(.*[.].*){2,})(?=(.*[A-Za-z].*){51,}).*$";
-//		match = Pattern.matches(pattern_string, data);
-//
-//		if (match) {
-//
-//			System.out.println("Valid Qualification.");
-//		} else {
-//			System.out.println("Invalid Qualification.");
-//		}
-//
-//		return match;
-//	}
-//	
-//	
-//	public static boolean validateResponsibilities(String data) {
-//		boolean match = false;
-//
-//		if (data == null)
-//			return false;
-//
-//		String pattern_string = "^(?=(.*[.].*){2,})(?=(.*[A-Za-z].*){51,}).*$";
-//		match = Pattern.matches(pattern_string, data);
-//
-//		if (match) {
-//
-//			System.out.println("Valid Responsibilities.");
-//		} else {
-//			System.out.println("Invalid Responsibilities.");
-//		}
-//
-//		return match;
-//	}
-//	
-//	
-//	public static boolean validateSummary(String data) {
-//		boolean match = false;
-//
-//		if (data == null)
-//			return false;
-//
-//		String pattern_string = "^(?=(.*[.].*){2,})(?=(.*[A-Za-z].*){51,}).*$";
-//		match = Pattern.matches(pattern_string, data);
-//
-//		if (match) {
-//
-//			System.out.println("Valid Summary.");
-//		} else {
-//			System.out.println("Invalid Summary.");
-//		}
-//
-//		return match;
-//	}
-
-	public static boolean validateLocation(String location) {
-		boolean isMatch = false;
-
-		if (location == null)
+	
+	public static boolean validatePrice(int price) {
+		boolean match = false;
+		String S = String.valueOf(price);
+		if(price == 0) {
 			return false;
-		String regex = "^(.{6,49})$";
-		isMatch = Pattern.matches(regex, location);
-		if (isMatch) {
-			System.out.println("The location is: Valid");
-		} else {
-			System.out.println("The location is: Invalid");
 		}
-		return isMatch;
-
+		
+		String regex = "^[+-]?\\d+$";
+		match = Pattern.matches(regex,S);
+		if(match) {
+			System.out.println("the price is Valid");
+		}else {
+			System.out.println("the price is Invalid");
+		}
+		return match;
 	}
+	
+	
+	public static boolean validateEmail(String email) {
+		
+		JobDAO jobDAO = new JobDAO();
+		
+		
+		boolean match = false;
+	
+		if(email == null) {
+			return false;
+		}
+		
+		try {
+			match = jobDAO.checkEmail(email);
+			if(match) {
+				System.out.println("the Email is Valid");
+			}else {
+				System.out.println("the Email is Invalid");
+			}
+		} catch (DAOException e) {
+			e.printStackTrace();
+		}
+		
+		return match;
+	}
+	
+	
+	
+	
+	
+	
+	
+
+
+	
 }

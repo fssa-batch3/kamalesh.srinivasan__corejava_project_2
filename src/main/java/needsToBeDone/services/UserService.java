@@ -13,11 +13,11 @@ public class UserService {
 		try {
 			UserValidator.validateUser(user);
 			if (userDAO.createUser(user)) {
-				System.out.println(user.getUsername() + " Successfully registered!");
+				System.out.println(user.getFirstName() +user.getLastName()+ " Successfully registered!");
 				return true;
 			} else {
 				return false;
-			}
+			} 
 
 		} catch (DAOException | InvalidUserException e) {
 			throw new ServiceException(e);

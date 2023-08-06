@@ -5,7 +5,6 @@ import java.time.LocalDate;
 public class User {
 
 	private String email;
-	private String username;
 	private String password;
 	private String firstName;
 	private String lastName;
@@ -17,9 +16,8 @@ public class User {
 	
 
 
-	public User(String email, String username, String password, String firstName, String lastName, boolean isOwner,long phoneNumber,LocalDate DOB,long aadhar,String address) {
+	public User(String email, String password, String firstName, String lastName, boolean isOwner,long phoneNumber,LocalDate DOB,long aadhar,String address) {
 		this.email = email;
-		this.username = username;
 		this.password = password;
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -58,9 +56,7 @@ public class User {
 		this.email = email;
 	}
 
-	public void setUsername(String username) {
-		this.username = username;
-	}
+
 
 	public void setPassword(String password) {
 		this.password = password;
@@ -78,9 +74,6 @@ public class User {
 		return email;
 	}
 
-	public String getUsername() {
-		return username;
-	}
 
 	public String getPassword() {
 		return password;

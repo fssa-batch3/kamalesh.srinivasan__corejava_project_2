@@ -64,18 +64,17 @@ public class UserDAO {
 			Connection connection = getConnection();
 
 			// Prepare SQL statement
-			String insertQuery = "Insert INTO user (email,username, password, firstname, lastname,isOwner,phone_number,dob,aadhar,address) VALUES(?,?,?,?,?,?,?,?,?,?)";
+			String insertQuery = "Insert INTO user (email, password, firstname, lastname,isOwner,phone_number,dob,aadhar,address) VALUES(?,?,?,?,?,?,?,?,?)";
 			PreparedStatement statement = connection.prepareStatement(insertQuery);
 			statement.setString(1, user.getEmail());
-			statement.setString(2, user.getUsername());
-			statement.setString(3, user.getPassword());
-			statement.setString(4, user.getFirstName());
-			statement.setString(5, user.getLastName());
-			statement.setBoolean(6,user.getisOwner());
-			statement.setLong(7, user.getPhoneNumber());
-			statement.setDate(8, Date.valueOf(user.getDOB()) );
-			statement.setLong(9, user.getAadhar());
-			statement.setString(10, user.getAddress());
+			statement.setString(2, user.getPassword());
+			statement.setString(3, user.getFirstName());
+			statement.setString(4, user.getLastName());
+			statement.setBoolean(5,user.getisOwner());
+			statement.setLong(6, user.getPhoneNumber());
+			statement.setDate(7, Date.valueOf(user.getDOB()) );
+			statement.setLong(8, user.getAadhar());
+			statement.setString(9, user.getAddress());
 
 			// Execute the query
 			int rows = statement.executeUpdate();
