@@ -35,7 +35,6 @@ public class JobValidator {
 		} else {
 			System.out.println("The title name is not valid");
 		}
-
 		return match;
 	}
 	

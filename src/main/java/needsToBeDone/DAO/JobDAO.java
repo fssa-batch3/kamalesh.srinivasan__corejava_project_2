@@ -82,6 +82,42 @@ public class JobDAO {
 			throw new DAOException(e);
 		}
 	}
+	
+	public boolean ListJobs(String id)throws DAOException {
+		try {
+			// Get connection
+			Connection connection = getConnection();
+
+			String selectQuery = "SELECT * FROM job WHERE jobid = ?";
+			PreparedStatement statement = connection.prepareStatement(selectQuery);
+			statement.setString(1, id);
+
+			// Execute the query
+			ResultSet resultSet = statement.executeQuery();
+
+			boolean userExists = resultSet.next();
+             System.out.println(resultSet);
+             if (userExists) {
+                 do {
+                     String jobid = resultSet.getString("jobid");
+                     String title = resultSet.getString("title");
+                     int price = resultSet.getInt("price");
+
+                     System.out.println("job Id: " + jobid + ", Title: " + title + ", Price: " + price);
+                 } while (resultSet.next());
+             } else {
+                 System.out.println("invalid jobId");
+             }
+			resultSet.close();
+			statement.close();
+			connection.close();
+
+			return userExists;
+
+		} catch (SQLException e) {
+			throw new DAOException(e);
+		}
 
 
+}
 }

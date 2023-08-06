@@ -57,8 +57,6 @@ public class TestCreateJob {
 			} catch (Exception e) {
 				e.printStackTrace(); 
 				fail();
-				
-
 			}
 	}
 	

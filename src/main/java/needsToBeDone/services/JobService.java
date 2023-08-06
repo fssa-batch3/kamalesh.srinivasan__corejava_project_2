@@ -24,4 +24,20 @@ public class JobService {
 			throw new ServiceException(e);
 		}
 	}
+	
+	public boolean listJobs(String id) throws ServiceException{
+		JobDAO jobDAO = new JobDAO();
+		try {
+
+			if (jobDAO.ListJobs(id)){
+				System.out.println("Job Found");
+				return true;
+			} else {
+				return false;
+			}
+
+		} catch (DAOException e) {
+			throw new ServiceException(e);
+		}
+	}
 }
