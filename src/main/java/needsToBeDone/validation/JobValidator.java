@@ -82,6 +82,32 @@ public class JobValidator {
 	}
 	
 	
+public static boolean validateJobid(String jobid) {
+		
+		JobDAO jobDAO = new JobDAO();
+		
+		
+		boolean match = false;
+	
+		if(jobid == null) {
+			return false;
+		}
+		
+		try {
+			match = jobDAO.checkJobId(jobid);
+			if(match) {
+				System.out.println("Valid jobid");
+			}else {
+				System.out.println("Invalid jobid");
+			}
+		} catch (DAOException e) {
+			e.printStackTrace();
+		}
+		
+		return match;
+	}
+	
+	
 	
 	
 	
