@@ -6,6 +6,15 @@ public class Job {
 	private int price;
 	private String email;
 	private String jobid;
+	private Boolean isDeleted;
+	
+
+
+
+
+	public Job() {
+		
+	}
 
 	
 
@@ -15,11 +24,28 @@ public class Job {
 		this.email = email;
 	}
 	
+	public Job( String jobid,boolean isDeleted) {
+		this.jobid = jobid;
+		this.isDeleted = isDeleted;
+	}
 	
-	public void UpdateJob(String title, int price, String jobid) {
+	
+	
+	public  Job(int price, String jobid,String title) {
 		this.title = title;
 		this.price = price;
 		this.jobid = jobid;
+	}
+	
+	
+	public Boolean getIsDeleted() {
+		return isDeleted;
+	}
+
+
+
+	public void setIsDeleted(Boolean isDeleted) {
+		this.isDeleted = isDeleted;
 	}
 	
 	public String getJobid() {

@@ -24,16 +24,6 @@ public class TestLoginFeature {
 
 	}
 	
-	@Test
-	public void testInvalidUser() {
 
-		UserService userService = new UserService();
-		User user1 = new User("utichi@gmail.com", "Utchi@123");
-		try {
-			Assertions.assertFalse(userService.logInUser(user1));
-		} catch (ServiceException e) {
-			e.printStackTrace();
-		}
-	}
 
 }

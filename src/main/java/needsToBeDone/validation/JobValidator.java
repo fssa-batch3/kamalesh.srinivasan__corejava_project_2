@@ -6,15 +6,16 @@ import needsToBeDone.*;
 import needsToBeDone.DAO.JobDAO;
 import needsToBeDone.DAO.exceptions.DAOException;
 import needsToBeDone.model.Job;
+import needsToBeDone.validation.exceptions.InvalidJobException;
 import needsToBeDone.validation.exceptions.InvalidUserException;
 
 public class JobValidator {
-	public static boolean validateJob(Job job) throws InvalidUserException {
+	public static boolean validateJob(Job job) throws InvalidJobException {
 
 		if (job != null && validateTitle(job.getTitle())&& validatePrice(job.getPrice()) && validateEmail(job.getEmail())) {
 			return true;
 		} else {
-			throw new InvalidUserException("Job details not valid");
+			throw new InvalidJobException("Job details not valid");
 		}
 
 	}
