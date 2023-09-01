@@ -45,7 +45,7 @@ public class PostDAO {
 				post.setUser(user);
 
 				posts.add(post);
-			}
+			} 
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

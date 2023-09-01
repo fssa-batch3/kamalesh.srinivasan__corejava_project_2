@@ -45,13 +45,10 @@ public class JobDAO {
 
 //	check the job is present in the job table 
 	public boolean checkEmail(String email) throws DAOException {
-		try {
-			// Get connection
-			Connection connection = ConnectionUtil.getConnection();
-
-			String selectQuery = "SELECT * FROM users WHERE email = ?";
-			PreparedStatement statement = connection.prepareStatement(selectQuery);
-			statement.setString(1, email);
+		String selectQuery = "SELECT * FROM users WHERE email = ?";
+		try (Connection connection = ConnectionUtil.getConnection();
+				PreparedStatement statement = connection.prepareStatement(selectQuery);) {
+						statement.setString(1, email);
 
 			// Execute the query
 			ResultSet resultSet = statement.executeQuery();
@@ -59,9 +56,6 @@ public class JobDAO {
 			boolean userExists = resultSet.next();
 
 			resultSet.close();
-			statement.close();
-			connection.close();
-
 			return userExists;
 
 		} catch (SQLException e) {
@@ -71,12 +65,10 @@ public class JobDAO {
 
 	public List<Job> listJobs(String id) throws DAOException {
 		List<Job> arr = new ArrayList<>();
-		try {
-			// Get connection
-			Connection connection = ConnectionUtil.getConnection();
+		String selectQuery = "SELECT * FROM job WHERE jobid = ? AND isDeleted = false";
+		try(Connection connection = ConnectionUtil.getConnection();
+				PreparedStatement statement = connection.prepareStatement(selectQuery);) {
 
-			String selectQuery = "SELECT * FROM job WHERE jobid = ? AND isDeleted = false";
-			PreparedStatement statement = connection.prepareStatement(selectQuery);
 			statement.setString(1, id);
 
 			// Execute the query
@@ -91,8 +83,6 @@ public class JobDAO {
 			}
 
 			resultSet.close();
-			statement.close();
-			connection.close();
 
 //			Return the job list 
 
@@ -106,12 +96,9 @@ public class JobDAO {
 	
 	public List<Job> listJobsByEmail(String email) throws DAOException {
 		List<Job> arr = new ArrayList<>();
-		try {
-			// Get connection
-			Connection connection = ConnectionUtil.getConnection();
-
-			String selectQuery = "SELECT * FROM job WHERE email = ? AND isDeleted = false ORDER BY created_at";
-			PreparedStatement statement = connection.prepareStatement(selectQuery);
+		String selectQuery = "SELECT * FROM job WHERE email = ? AND isDeleted = false ORDER BY created_at";
+		try (Connection connection = ConnectionUtil.getConnection();
+				PreparedStatement statement = connection.prepareStatement(selectQuery);){
 			statement.setString(1, email);
 
 			// Execute the query
@@ -128,8 +115,7 @@ public class JobDAO {
 			}
 
 			resultSet.close();
-			statement.close();
-			connection.close();
+
 
 //			Return the job list 
 
@@ -142,13 +128,9 @@ public class JobDAO {
 
 	public boolean updateJob(Job job) throws DAOException {
 
-		try {
-			// Get connection
-			Connection connection = ConnectionUtil.getConnection();
-
-			// Prepare SQL statement
-			String updateQuery = "UPDATE job SET title = ?, price = ? WHERE jobid = ?";
-			PreparedStatement statement = connection.prepareStatement(updateQuery);
+		String updateQuery = "UPDATE job SET title = ?, price = ? WHERE jobid = ?";
+		try (Connection connection = ConnectionUtil.getConnection();
+				PreparedStatement statement = connection.prepareStatement(updateQuery);){
 			statement.setString(1, job.getTitle());
 			statement.setInt(2, job.getPrice());
 			statement.setString(3, job.getJobid());
@@ -163,14 +145,10 @@ public class JobDAO {
 
 	public boolean deleteJob(String jobId) throws DAOException {
 
-		try {
-			// Get connection
-			Connection connection = ConnectionUtil.getConnection();
-
-			// Prepare SQL statement
-			String updateQuery = "UPDATE job SET isDeleted = TRUE WHERE jobid = ?";
-			PreparedStatement statement = connection.prepareStatement(updateQuery);
-			statement.setString(1, jobId);
+		String updateQuery = "UPDATE job SET isDeleted = TRUE WHERE jobid = ?";
+		try (Connection connection = ConnectionUtil.getConnection();
+				PreparedStatement statement = connection.prepareStatement(updateQuery);){
+						statement.setString(1, jobId);
 			// Execute the query
 			int rows = statement.executeUpdate();
 			// Return successful or not
@@ -181,12 +159,10 @@ public class JobDAO {
 	}
 
 	public boolean checkJobId(String id) throws DAOException {
-		try {
-			// Get connection
-			Connection connection = ConnectionUtil.getConnection();
+		String selectQuery = "SELECT jobid FROM job WHERE jobid = ?";
+		try (Connection connection = ConnectionUtil.getConnection();
+				PreparedStatement statement = connection.prepareStatement(selectQuery);){
 
-			String selectQuery = "SELECT jobid FROM job WHERE jobid = ?";
-			PreparedStatement statement = connection.prepareStatement(selectQuery);
 			statement.setString(1, id);
 
 			// Execute the query
@@ -194,8 +170,6 @@ public class JobDAO {
 
 			boolean userExists = resultSet.next();
 			resultSet.close();
-			statement.close();
-			connection.close();
 
 			return userExists;
 

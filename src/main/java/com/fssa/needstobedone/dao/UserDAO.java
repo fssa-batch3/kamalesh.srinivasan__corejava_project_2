@@ -25,7 +25,7 @@ public class UserDAO {
 			pst.setString(1, user.getEmail());
 			pst.setString(2, user.getPassword());
 			pst.setString(3, user.getFirstName());
-			pst.setString(4, user.getLastName());
+			pst.setString(4, user.getLastName());  
 			pst.setBoolean(5, user.getisOwner());
 			pst.setLong(6, user.getPhoneNumber());
 			pst.setDate(7, Date.valueOf(user.getDOB()));

@@ -35,7 +35,6 @@ public class JobValidator {
 	}
 
 	public static boolean validatePrice(int price) throws ValidationException {
-		boolean match = false;
 		if (price == 0)
 			throw new ValidationException("Job Price is not valid - job price cannot be 0");
 		if (price < 0) {
