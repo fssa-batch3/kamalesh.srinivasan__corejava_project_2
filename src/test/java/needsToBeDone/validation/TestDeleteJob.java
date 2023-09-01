@@ -6,9 +6,9 @@ import static org.junit.Assert.fail;
 
 import org.junit.jupiter.api.Test;
 
-import needsToBeDone.model.Job;
-import needsToBeDone.services.JobService;
-import needsToBeDone.services.exceptions.ServiceException;
+import com.fssa.needstobedone.exception.ServiceException;
+import com.fssa.needstobedone.model.Job;
+import com.fssa.needstobedone.services.JobService;
 
 public class TestDeleteJob {
 	@Test
@@ -19,11 +19,9 @@ public class TestDeleteJob {
 			assertFalse(jobService.DeleteJobs(job1));
 		} catch (ServiceException e) {
 			e.printStackTrace();
-			
+
 		}
 	}
-	
-	
 
 	@Test
 	public void testValidDeleteJob() {

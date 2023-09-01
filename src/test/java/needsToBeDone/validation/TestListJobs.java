@@ -6,30 +6,29 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 import org.junit.jupiter.api.Test;
 
-import needsToBeDone.services.JobService;
-import needsToBeDone.services.exceptions.ServiceException;
+import com.fssa.needstobedone.exception.ServiceException;
+import com.fssa.needstobedone.services.JobService;
 
 public class TestListJobs {
 
 	@Test
-	public void testValidListData(){
+	public void testValidListData() {
 		try {
-       	 JobService jobService = new JobService();
-		   assertTrue(jobService.listJobs("128718a6-b34c-4557-abb6-61f5175d8a85"));
+			JobService jobService = new JobService();
+			assertTrue(jobService.listJobs("128718a6-b34c-4557-abb6-61f5175d8a85"));
 		} catch (ServiceException e) {
 			e.printStackTrace();
 			fail();
 		}
 	}
-	
-	
+
 	@Test
-	public void testInvalidJobId(){
+	public void testInvalidJobId() {
 		try {
-       	 JobService jobService = new JobService();
-		   assertFalse(jobService.listJobs("128718a6-b34c-4557-abb6-61f5175d8a85dfs"));
+			JobService jobService = new JobService();
+			assertFalse(jobService.listJobs("128718a6-b34c-4557-abb6-61f5175d8a85dfs"));
 		} catch (ServiceException e) {
 			e.printStackTrace();
 		}
-	}	
+	}
 }

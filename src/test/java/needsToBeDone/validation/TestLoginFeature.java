@@ -3,9 +3,9 @@ package needsToBeDone.validation;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import needsToBeDone.model.User;
-import needsToBeDone.services.UserService;
-import needsToBeDone.services.exceptions.ServiceException;
+import com.fssa.needstobedone.exception.ServiceException;
+import com.fssa.needstobedone.model.User;
+import com.fssa.needstobedone.services.UserService;
 
 public class TestLoginFeature {
 	@Test
@@ -19,7 +19,7 @@ public class TestLoginFeature {
 			e.printStackTrace();
 		}
 	}
-	
+
 	@Test
 	public void testInvalidEmail() {
 
@@ -31,7 +31,7 @@ public class TestLoginFeature {
 			e.printStackTrace();
 		}
 	}
-	
+
 	@Test
 	public void testInvalidPassword() {
 

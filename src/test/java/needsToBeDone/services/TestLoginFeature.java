@@ -1,11 +1,7 @@
 package needsToBeDone.services;
 
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
-
-import needsToBeDone.model.User;
-import needsToBeDone.services.UserService;
-import needsToBeDone.services.exceptions.ServiceException;
+import com.fssa.needstobedone.model.User;
+import com.fssa.needstobedone.services.UserService;
 
 public class TestLoginFeature {
 
@@ -23,7 +19,5 @@ public class TestLoginFeature {
 		}
 
 	}
-	
-
 
 }

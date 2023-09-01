@@ -6,75 +6,70 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 import org.junit.jupiter.api.Test;
 
-import needsToBeDone.model.Job;
-import needsToBeDone.services.JobService;
+import com.fssa.needstobedone.model.Job;
+import com.fssa.needstobedone.services.JobService;
 
 public class TestCreateJob {
-	@Test 
+	@Test
 	public void testvalidCreateJob() {
 
 		Job job1 = new Job("SoftwareDevelopment", 200000, "kikamakles@gmail.com");
-	JobService jobService = new JobService();
+		JobService jobService = new JobService();
 
 		try {
 			assertTrue(jobService.createJob(job1));
 
 		} catch (Exception e) {
-			e.printStackTrace(); 
+			e.printStackTrace();
 			fail();
-			
 
 		}
 
 	}
-	
-	
+
 	@Test
 	public void testInvalidEmail() {
 		Job job1 = new Job("SoftwareDevelopment", 200000, "kik@gmail.com");
 		JobService jobService = new JobService();
 
-			try {
-				assertFalse(jobService.createJob(job1));
+		try {
+			assertFalse(jobService.createJob(job1));
 
-			} catch (Exception e) {
-				e.printStackTrace(); 
-			
-			}
+		} catch (Exception e) {
+			e.printStackTrace();
+
+		}
 	}
-	
-	
-	@Test 
+
+	@Test
 	public void testInvalidTitle() {
 
 		Job job1 = new Job("Software Development346345", 200000, "kikamakles@gmail.com");
-	JobService jobService = new JobService();
+		JobService jobService = new JobService();
 
 		try {
 			assertTrue(jobService.createJob(job1));
 
 		} catch (Exception e) {
-			e.printStackTrace(); 
+			e.printStackTrace();
 			fail();
-			
 
 		}
 
 	}
-	
-	@Test 
+
+	@Test
 	public void testInvalidPrice() {
 
 		Job job1 = new Job("Software Development346345", 2000000, "kikamakles@gmail.com");
-	JobService jobService = new JobService();
+		JobService jobService = new JobService();
 
 		try {
 			assertTrue(jobService.createJob(job1));
 
 		} catch (Exception e) {
-			e.printStackTrace(); 
+			e.printStackTrace();
 			fail();
-			
 
 		}
 

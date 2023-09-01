@@ -1,8 +1,8 @@
 package needsToBeDone.services;
 
-import needsToBeDone.model.Job;
-import needsToBeDone.services.JobService;
-import needsToBeDone.services.exceptions.ServiceException;
+import com.fssa.needstobedone.exception.ServiceException;
+import com.fssa.needstobedone.model.Job;
+import com.fssa.needstobedone.services.JobService;
 
 public class TestUpdateJob {
 	public static void main(String[] args) {

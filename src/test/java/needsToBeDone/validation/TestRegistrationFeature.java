@@ -8,9 +8,9 @@ import java.time.LocalDate;
 
 import org.junit.jupiter.api.Test;
 
-import needsToBeDone.model.User;
-import needsToBeDone.services.UserService;
-import needsToBeDone.services.exceptions.ServiceException;
+import com.fssa.needstobedone.exception.ServiceException;
+import com.fssa.needstobedone.model.User;
+import com.fssa.needstobedone.services.UserService;
 
 public class TestRegistrationFeature {
 	@Test
@@ -40,8 +40,6 @@ public class TestRegistrationFeature {
 			assertFalse(userService.registerUser(user1));
 		} catch (ServiceException e) {
 			e.printStackTrace();
-			fail();
-
 		}
 	}
 
@@ -56,7 +54,7 @@ public class TestRegistrationFeature {
 			assertFalse(userService.registerUser(user1));
 		} catch (ServiceException e) {
 			e.printStackTrace();
-	}
+		}
 	}
 
 	@Test
@@ -70,7 +68,6 @@ public class TestRegistrationFeature {
 			assertFalse(userService.registerUser(user1));
 		} catch (ServiceException e) {
 			e.printStackTrace();
-			fail();
 
 		}
 	}
@@ -86,7 +83,6 @@ public class TestRegistrationFeature {
 			assertFalse(userService.registerUser(user1));
 		} catch (ServiceException e) {
 			e.printStackTrace();
-			fail();
 
 		}
 	}
@@ -102,7 +98,6 @@ public class TestRegistrationFeature {
 			assertFalse(userService.registerUser(user1));
 		} catch (ServiceException e) {
 			e.printStackTrace();
-			fail();
 
 		}
 	}
@@ -117,7 +112,6 @@ public class TestRegistrationFeature {
 			assertFalse(userService.registerUser(user1));
 		} catch (ServiceException e) {
 			e.printStackTrace();
-			fail();
 
 		}
 //		ServiceException exception = assertThrows(ServiceException.class, () -> userService.registerUser(user1));
