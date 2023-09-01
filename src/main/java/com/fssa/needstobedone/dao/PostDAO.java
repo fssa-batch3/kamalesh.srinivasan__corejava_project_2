@@ -15,12 +15,12 @@ import com.fssa.needstobedone.utils.ConnectionUtil;
 public class PostDAO {
 
 	public boolean createPost(Post post) throws DAOException {
-		try (Connection connection = ConnectionUtil.getConnection();) {
-			String query = "INSERT INTO posts (title, user_id) VALUES (?, ?)";
-			PreparedStatement preparedStatement = connection.prepareStatement(query);
-			preparedStatement.setString(1, post.getTitle());
-			preparedStatement.setInt(2, post.getUser().getUserId());
-			int rows = preparedStatement.executeUpdate();
+		String query = "INSERT INTO posts (title, user_id) VALUES (?, ?)";
+		try (Connection connection = ConnectionUtil.getConnection();
+				PreparedStatement statement = connection.prepareStatement(query);) {
+			statement.setString(1, post.getTitle());
+			statement.setInt(2, post.getUser().getUserId());
+			int rows = statement.executeUpdate();
 
 			return rows > 0;
 		} catch (SQLException e) {
@@ -32,10 +32,10 @@ public class PostDAO {
 
 	public List<Post> getAllPosts() {
 		List<Post> posts = new ArrayList<>();
-		try (Connection connection = ConnectionUtil.getConnection()) {
-			String query = "SELECT * FROM posts";
-			PreparedStatement preparedStatement = connection.prepareStatement(query);
-			ResultSet resultSet = preparedStatement.executeQuery();
+		String query = "SELECT * FROM posts";
+		try(Connection connection = ConnectionUtil.getConnection();
+				PreparedStatement statement = connection.prepareStatement(query);){
+			ResultSet resultSet = statement.executeQuery();
 			while (resultSet.next()) {
 				Post post = new Post();
 				post.setPostId(resultSet.getInt("post_id"));

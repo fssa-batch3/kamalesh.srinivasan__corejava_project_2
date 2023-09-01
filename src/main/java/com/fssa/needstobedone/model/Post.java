@@ -28,7 +28,7 @@ public class Post {
 
 	public void setTitle(String title) {
 		this.title = title;
-	}
+	} 
 
 	public int getPostId() {
 		return postId;
