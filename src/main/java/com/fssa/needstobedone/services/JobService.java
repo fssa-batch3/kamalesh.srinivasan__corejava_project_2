@@ -21,11 +21,11 @@ public class JobService {
 		}
 	}
 
-	public List<Job> listJobs(String id) throws ServiceException {
+	public Job listJobs(String id) throws ServiceException {
 		JobDAO jobDAO = new JobDAO();
 
 		try {
-			List<Job> result = jobDAO.listJobs(id);
+			Job result = jobDAO.listJobs(id);	
 			if (result != null) {
 				return result;
 			} else {
@@ -57,6 +57,7 @@ public class JobService {
 	public boolean UpdateJobs(Job job) throws ServiceException {
 		JobDAO jobDAO = new JobDAO();
 		try {
+			
 			JobValidator.validateJobid(job.getJobid());
 			jobDAO.updateJob(job);
 			return true;

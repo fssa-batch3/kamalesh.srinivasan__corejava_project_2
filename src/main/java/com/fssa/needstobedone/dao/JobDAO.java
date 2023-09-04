@@ -63,25 +63,26 @@ public class JobDAO {
 		}
 	}
 
-	public List<Job> listJobs(String id) throws DAOException {
+	public Job listJobs(String id) throws DAOException {
 		List<Job> arr = new ArrayList<>();
 		String selectQuery = "SELECT * FROM job WHERE jobid = ? AND isDeleted = false";
 		try(Connection connection = ConnectionUtil.getConnection();
 				PreparedStatement statement = connection.prepareStatement(selectQuery);) {
-
+            System.out.println(id);
 			statement.setString(1, id);
 
 			// Execute the query
 			ResultSet resultSet = statement.executeQuery();
-			
+			System.out.println(resultSet.toString());
+			System.out.println("");
 			while (resultSet.next()) {
 				Job job = new Job();
 				job.setJobid(resultSet.getString("jobid"));
-				job.setEmail(resultSet.getString("title"));
+				job.setTitle(resultSet.getString("title"));
 				job.setPrice(resultSet.getInt("price"));
 				arr.add(job);
 			}
-
+ 
 			resultSet.close();
 
 //			Return the job list 
@@ -89,7 +90,8 @@ public class JobDAO {
 		} catch (SQLException e) {
 			throw new DAOException(e);
 		}
-		return arr;
+		System.out.println(arr);
+		return arr.get(0);
 
 	}
 	

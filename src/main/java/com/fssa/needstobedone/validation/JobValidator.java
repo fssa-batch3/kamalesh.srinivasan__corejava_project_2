@@ -76,7 +76,7 @@ public class JobValidator {
 
 		try {
 			match = jobDAO.checkJobId(jobid);
-			if (match) {
+			if (!match) {
 				throw new ValidationException("JobId is not found");
 			}
 		} catch (DAOException e) {

@@ -10,7 +10,6 @@ import org.junit.Test;
 import com.fssa.needstobedone.model.User;
 import com.fssa.needstobedone.validation.UserValidator;
 
-import needsToBeDone.validation.exceptions.InvalidUserException;
 
 public class UserValidatorTest {
 

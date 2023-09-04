@@ -12,7 +12,7 @@ public class TestLoginFeature {
 
 		try {
 			userService.logInUser(user1);
-
+             
 		} catch (Exception e) {
 			e.printStackTrace();
 
@@ -20,4 +20,4 @@ public class TestLoginFeature {
 
 	}
 
-}
+} 
