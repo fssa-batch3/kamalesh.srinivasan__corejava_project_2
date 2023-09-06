@@ -9,7 +9,7 @@ public class Job {
 	private Boolean isDeleted;
 
 	public Job() {
-
+		// Default Constructor
 	}
 
 	public Job(String title, int price, String email) {
@@ -17,8 +17,6 @@ public class Job {
 		this.price = price;
 		this.email = email;
 	}
-
-
 
 	public Job(int price, String jobid, String title) {
 		this.title = title;
@@ -58,7 +56,7 @@ public class Job {
 		this.price = price;
 	}
 
-	public String getEmail() { 
+	public String getEmail() {
 		return email;
 	}
 

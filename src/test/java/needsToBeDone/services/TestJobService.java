@@ -1,6 +1,7 @@
 package needsToBeDone.services;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
@@ -14,12 +15,12 @@ import com.fssa.needstobedone.exception.ServiceException;
 import com.fssa.needstobedone.model.Job;
 import com.fssa.needstobedone.services.JobService;
 
-public class TestJobService {
+class TestJobService {
 
 	private JobService jobService;
 
 	@BeforeEach
-	public void setUp() {
+	void setUp() { 
 		jobService = new JobService();
 	}
 
@@ -34,18 +35,18 @@ public class TestJobService {
 	}
 
 	@Test 
-	public void testCreateInvalidJob() {
+	void testCreateInvalidJob() {
 		Job invalidJob = new Job("FrontEnd", 200000, "kamaleshInvalidE.srinivasan@fssa.freshworks.com");
 		ServiceException result = assertThrows(ServiceException.class, () -> jobService.createJob(invalidJob));
 		assertEquals("Email is not found",result.getMessage());
 	} 
 
 	@Test
-	public void testListValidJobs() {
+	void testListValidJobs() {
 		String validJobId = "08b09556-5de1-4b9e-bbd8-1d7fddd7809c";
 		try {
 			Job result = jobService.listJobs(validJobId);
-			assertTrue(result != null);
+			assertNotNull(result);
 		} catch (ServiceException e) {
 			fail("ServiceException occurred: " + e.getMessage());
 		}
@@ -53,14 +54,14 @@ public class TestJobService {
 	}
 
 	@Test
-	public void testListInvalidJobs() {
+	void testListInvalidJobs() {
 		String invalidJobId = "0bdfa607-c773-4705-a379-c1e9b4f2b281InvalidJobId";			
 			ServiceException result = assertThrows(ServiceException.class, () -> jobService.listJobs(invalidJobId));
 			assertEquals("Job Not Found",result.getMessage());
 	}
 
 	@Test
-	public void testUpdateValidJob() {
+	void testUpdateValidJob() {
 		Job validJobToUpdate = new Job(1000,"08b09556-5de1-4b9e-bbd8-1d7fddd7809c","UpdatedJob");
 		try {
 			assertTrue(jobService.updateJobs(validJobToUpdate));
@@ -70,14 +71,14 @@ public class TestJobService {
 	} 
 
 	@Test
-	public void testUpdateInvalidJob() {
+	void testUpdateInvalidJob() {
 		Job invalidJobToUpdate = new Job(1000,"0bdfa607-c773-4705-a379-c1e9b4f2b281invalidJobToUpdate","UpdatedJob");
 		ServiceException result = assertThrows(ServiceException.class, () -> jobService.updateJobs(invalidJobToUpdate));
 		assertEquals("JobId is not valid",result.getMessage());
 	}
 
 	@Test
-    public void testDeleteValidJob() {
+    void testDeleteValidJob() {
         String validJobIdToDelete = "0bdfa607-c773-4705-a379-c1e9b4f2b281";
         try {
             assertTrue(jobService.deleteJobs(validJobIdToDelete));
@@ -87,7 +88,7 @@ public class TestJobService {
     }
 
 	@Test
-    public void testDeleteInvalidJob() {
+    void testDeleteInvalidJob() {
         String invalidJobIdToDelete = "0bdfa607-c773-4705-a379-c1e9b4f2b281InvalidJobId";
     		ServiceException result = assertThrows(ServiceException.class, () -> jobService.deleteJobs(invalidJobIdToDelete));
     		System.out.println(result.getMessage());
@@ -96,11 +97,11 @@ public class TestJobService {
     }
 	
 	@Test 
-	public void testListValidJobsByEmail() {
+	void testListValidJobsByEmail() {
 		String validEmail = "kamalesh.srinivasan@fssa.freshworks.com";
 		try {
 			List<Job> result = jobService.listJobsByEmail(validEmail);
-			assertTrue(result != null);
+			assertNotNull(result);
 		} catch (ServiceException e) {
 			fail("ServiceException occurred: " + e.getMessage());
 		}
@@ -109,7 +110,7 @@ public class TestJobService {
 	
 	
 	@Test
-	public void testListInvalidJobsbyEmail() {
+	void testListInvalidJobsbyEmail() {
 		String invalidEmail = "invalidemail@fssa.freshworks.com";			
 			ServiceException result = assertThrows(ServiceException.class, () -> jobService.listJobsByEmail(invalidEmail));
 			assertEquals("No Jobs Found",result.getMessage());

@@ -29,7 +29,7 @@ public class UserValidator {
 	public static boolean validateName(String name) throws ValidationException {
 		boolean match = false;
 
-		if (name == null)
+		if (name == null) 
 			throw new ValidationException("Name is not valid - Name cannot be empty");
 
 		String regex = "^[A-Za-z]{1,30}$";
@@ -58,8 +58,8 @@ public class UserValidator {
 		if (password == null)
 			throw new ValidationException("Password is not valid - Password cannot be empty");
 
-		String pattern_string = "(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@#$%^&+=])(?=.*[^\\s]).{8,}$";
-		match = Pattern.matches(pattern_string, password);
+		String passwordPattern = "(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@#$%^&+=])(?=.*[^\\s]).{8,}$";
+		match = Pattern.matches(passwordPattern, password);
 
 		if (!match) {
 			throw new ValidationException(
@@ -108,11 +108,11 @@ public class UserValidator {
 	public static boolean validateAadhar(long aadhar) throws ValidationException {
 		boolean isMatch = false;
 
-		String Aadhar = String.valueOf(aadhar);
-		if (Aadhar == null)
+		String aadharNumber = String.valueOf(aadhar);
+		if (aadharNumber == null)
 			throw new ValidationException("Aadhar number is not valid - Aadhar number cannot be empty");
-		String regex = "^[0-9]{12}$";
-		isMatch = Pattern.matches(regex, Aadhar);
+		String regex = "^\\d{12}$";
+		isMatch = Pattern.matches(regex, aadharNumber);
 		if (!isMatch) {
 			throw new ValidationException("Aadhaar number is not valid - Aadhaar number should be a 12-digit number.");
 		}
@@ -123,12 +123,12 @@ public class UserValidator {
 	public static boolean validatePhoneNumber(long l) throws ValidationException {
 		boolean isMatch = false;
 
-		String Phone = String.valueOf(l);
+		String phoneNumber = String.valueOf(l);
 
-		if (Phone == null)
+		if (phoneNumber == null)
 			throw new ValidationException("Phone number is not valid - Phone number cannot be empty");
-		String regex = "^[0-9]{10}$";
-		isMatch = Pattern.matches(regex, Phone);
+		String regex = "^\\d{10}$";
+		isMatch = Pattern.matches(regex, phoneNumber);
 		if (!isMatch) {
 			throw new ValidationException("Phone number is not valid - Phone number should be a 10-digit number.");
 		}

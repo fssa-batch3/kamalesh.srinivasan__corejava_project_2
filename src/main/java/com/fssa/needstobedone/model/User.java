@@ -16,13 +16,13 @@ public class User {
 	private int userId;
 
 	public User(String email, String password, String firstName, String lastName, boolean isOwner, long phoneNumber,
-			LocalDate DOB, long aadhar, String address) {
+			LocalDate DateOfBirth, long aadhar, String address) {
 		this.email = email;
 		this.password = password;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.isOwner = isOwner;
-		this.DOB = DOB;
+		this.DOB = DateOfBirth;
 		this.phoneNumber = phoneNumber;
 		this.aadhar = aadhar;
 		this.address = address;

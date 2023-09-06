@@ -3,8 +3,6 @@ package com.fssa.needstobedone.validation;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import com.fssa.needstobedone.dao.JobDAO;
-import com.fssa.needstobedone.exception.DAOException;
 import com.fssa.needstobedone.exception.ValidationException;
 import com.fssa.needstobedone.model.Job;
 

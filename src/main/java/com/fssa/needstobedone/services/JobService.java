@@ -30,7 +30,6 @@ public class JobService {
 		try {
 			Job result = jobDAO.listJobs(id);
 			jobDAO.checkJobId(id);
-			System.out.println("List Jobs" + result.toString());
 			return result;
 
 		} catch (DAOException e) {
@@ -44,7 +43,6 @@ public class JobService {
 		try {
 			List<Job> result = jobDAO.listJobsByEmail(email); 
 			if (result != null && !result.isEmpty()) {
-				System.out.println(result.toString());
 				return result;
 			} else {
 				throw new DAOException("No Jobs Found");

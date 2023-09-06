@@ -10,11 +10,12 @@ import java.sql.SQLException;
 
 import com.fssa.needstobedone.exception.DAOException;
 import com.fssa.needstobedone.model.User;
-import com.fssa.needstobedone.utils.ConnectionUtil;;
+import com.fssa.needstobedone.utils.ConnectionUtil;
 
 public class UserDAO {
 
 	public UserDAO() {
+		// Default Constructor
 	}
 
 	public boolean createUser(User user) throws DAOException {
@@ -25,7 +26,7 @@ public class UserDAO {
 			pst.setString(1, user.getEmail());
 			pst.setString(2, user.getPassword());
 			pst.setString(3, user.getFirstName());
-			pst.setString(4, user.getLastName());  
+			pst.setString(4, user.getLastName());
 			pst.setBoolean(5, user.getisOwner());
 			pst.setLong(6, user.getPhoneNumber());
 			pst.setDate(7, Date.valueOf(user.getDOB()));
@@ -73,16 +74,11 @@ public class UserDAO {
 					user = buildUserFromResultSet(rs);
 				}
 			}
-			if (user == null) {
-				return true;
-			} else {
-				return false;
-			}
-
+			return (user == null) ;
+			
 		} catch (SQLException e) {
 			throw new DAOException(e);
 		}
 	}
-
 
 }
