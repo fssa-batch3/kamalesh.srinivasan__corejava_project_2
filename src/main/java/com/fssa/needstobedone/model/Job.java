@@ -18,10 +18,7 @@ public class Job {
 		this.email = email;
 	}
 
-	public Job(String jobid, boolean isDeleted) {
-		this.jobid = jobid;
-		this.isDeleted = isDeleted;
-	}
+
 
 	public Job(int price, String jobid, String title) {
 		this.title = title;
@@ -61,7 +58,7 @@ public class Job {
 		this.price = price;
 	}
 
-	public String getEmail() {
+	public String getEmail() { 
 		return email;
 	}
 

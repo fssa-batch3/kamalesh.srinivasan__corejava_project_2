@@ -84,6 +84,5 @@ public class UserDAO {
 		}
 	}
 
-	// Other methods for update, delete, and more...
 
 }

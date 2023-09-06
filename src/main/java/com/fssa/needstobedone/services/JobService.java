@@ -14,10 +14,13 @@ public class JobService {
 		JobDAO jobDAO = new JobDAO();
 		try {
 			JobValidator.validateJob(job);
+			if(!jobDAO.checkEmail(job.getEmail())) {
+				throw new DAOException("Email is not found");
+			}
 			jobDAO.createJob(job);
 			return true;
 		} catch (DAOException | ValidationException e) {
-			throw new ServiceException(e.getMessage());
+			throw new ServiceException(e.getMessage()); 
 		}
 	}
 
@@ -25,41 +28,43 @@ public class JobService {
 		JobDAO jobDAO = new JobDAO();
 
 		try {
-			Job result = jobDAO.listJobs(id);	
-			if (result != null) {
-				return result;
-			} else {
-				throw new ServiceException("No Jobs Found");
-			}
+			Job result = jobDAO.listJobs(id);
+			jobDAO.checkJobId(id);
+			System.out.println("List Jobs" + result.toString());
+			return result;
 
 		} catch (DAOException e) {
 			throw new ServiceException(e.getMessage());
 		}
 	}
-	
-	
+
 	public List<Job> listJobsByEmail(String email) throws ServiceException {
 		JobDAO jobDAO = new JobDAO();
 
 		try {
-			List<Job> result = jobDAO.listJobsByEmail(email);
-			if (result != null) {
+			List<Job> result = jobDAO.listJobsByEmail(email); 
+			if (result != null && !result.isEmpty()) {
+				System.out.println(result.toString());
 				return result;
 			} else {
-				throw new ServiceException("No Jobs Found");
-			}
+				throw new DAOException("No Jobs Found");
+			} 
 
 		} catch (DAOException e) {
+            e.printStackTrace();
 			throw new ServiceException(e.getMessage());
 		}
 	}
 
-	public boolean UpdateJobs(Job job) throws ServiceException {
+	public boolean updateJobs(Job job) throws ServiceException {
 		JobDAO jobDAO = new JobDAO();
-		try {
-			
-			JobValidator.validateJobid(job.getJobid());
-			jobDAO.updateJob(job);
+		try { 
+ 
+			JobValidator.validateJob(job);
+			if(!jobDAO.checkJobId(job.getJobid())) {
+				throw new DAOException("JobId is not valid");
+			}
+			jobDAO.updateJob(job); 
 			return true;
 
 		} catch (DAOException | ValidationException e) {
@@ -67,15 +72,17 @@ public class JobService {
 		}
 	}
 
-	public boolean DeleteJobs(String jobId) throws ServiceException {
+	public boolean deleteJobs(String jobId) throws ServiceException {
 		JobDAO jobDAO = new JobDAO();
 
 		try {
-			JobValidator.validateJobid(jobId);
+			if(!jobDAO.checkJobId(jobId)) {
+				throw new DAOException("Job id is not exists");
+			}
 			jobDAO.deleteJob(jobId);
 			return true;
-		} catch (DAOException | ValidationException e) {
-			throw new ServiceException(e);
+		} catch (DAOException e) {
+			throw new ServiceException(e.getMessage());
 		}
 	}
 }

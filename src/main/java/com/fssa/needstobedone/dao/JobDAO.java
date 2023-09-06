@@ -53,7 +53,7 @@ public class JobDAO {
 			// Execute the query
 			ResultSet resultSet = statement.executeQuery();
 
-			boolean userExists = resultSet.next();
+			boolean userExists = resultSet.next(); 
 
 			resultSet.close();
 			return userExists;
@@ -73,25 +73,20 @@ public class JobDAO {
 
 			// Execute the query
 			ResultSet resultSet = statement.executeQuery();
-			System.out.println(resultSet.toString());
-			System.out.println("");
 			while (resultSet.next()) {
 				Job job = new Job();
 				job.setJobid(resultSet.getString("jobid"));
 				job.setTitle(resultSet.getString("title"));
 				job.setPrice(resultSet.getInt("price"));
-				arr.add(job);
+				arr.add(job); 
 			}
- 
+			System.out.println(arr.toString());
 			resultSet.close();
-
-//			Return the job list 
-
-		} catch (SQLException e) {
-			throw new DAOException(e);
+			return arr.get(0); 
+		} catch (SQLException | IndexOutOfBoundsException e) {
+			throw new DAOException("Job Not Found");
 		}
-		System.out.println(arr);
-		return arr.get(0);
+		
 
 	}
 	
@@ -172,7 +167,6 @@ public class JobDAO {
 
 			boolean userExists = resultSet.next();
 			resultSet.close();
-
 			return userExists;
 
 		} catch (SQLException e) {

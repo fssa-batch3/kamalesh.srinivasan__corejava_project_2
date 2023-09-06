@@ -11,11 +11,10 @@ import com.fssa.needstobedone.model.Job;
 public class JobValidator {
 	public static void validateJob(Job job) throws ValidationException {
 
-		if (job != null && validateTitle(job.getTitle()) && validatePrice(job.getPrice())
-				&& validateEmail(job.getEmail())) {
-			
-		} 
-
+		if (job != null && validateTitle(job.getTitle())) {
+			validatePrice(job.getPrice());
+		}
+ 
 	}
 
 	public static boolean validateTitle(String title) throws ValidationException {
@@ -44,46 +43,5 @@ public class JobValidator {
 		return true;
 	}
 
-	public static boolean validateEmail(String email) throws ValidationException {
-
-		JobDAO jobDAO = new JobDAO();
-
-		boolean match = false;
-
-		if (email == null)
-			throw new ValidationException("Email is not valid - Email cannot be empty");
-
-		try {
-			match = jobDAO.checkEmail(email);
-			if (!match) {
-				throw new ValidationException("Email is not found");
-			}
-		} catch (DAOException e) {
-			throw new ValidationException(e.getMessage());
-		}
-
-		return match;
-	}
-
-	public static boolean validateJobid(String jobid) throws ValidationException {
-
-		JobDAO jobDAO = new JobDAO();
-
-		boolean match = false;
-
-		if (jobid == null)
-			throw new ValidationException("JobId is not valid - JobId cannot be empty");
-
-		try {
-			match = jobDAO.checkJobId(jobid);
-			if (!match) {
-				throw new ValidationException("JobId is not found");
-			}
-		} catch (DAOException e) {
-			throw new ValidationException(e.getMessage());
-		}
-
-		return match;
-	}
 
 }

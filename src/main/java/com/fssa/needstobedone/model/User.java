@@ -96,10 +96,6 @@ public class User {
 		return aadhar;
 	}
 
-	public void setAadhar(long aadhar) {
-		this.aadhar = aadhar;
-	}
-
 	public String getAddress() {
 		return address;
 	}
@@ -108,13 +104,7 @@ public class User {
 		this.address = address;
 	}
 
-	public int getUserId() {
-		return userId;
-	}
 
-	public void setUserId(int userId) {
-		this.userId = userId;
-	}
 
 	@Override
 	public String toString() {

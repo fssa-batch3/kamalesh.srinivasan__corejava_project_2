@@ -11,14 +11,18 @@ import com.fssa.needstobedone.exception.ValidationException;
 import com.fssa.needstobedone.model.User;
 
 public class UserValidator {
+	
+	public UserValidator() {
+		// Default Constructor
+	}
 
 	public static void validateUser(User user) throws ValidationException {
 
 		if (user != null && validatePassword(user.getPassword()) && validateEmail(user.getEmail())
 				&& validateName(user.getFirstName()) && validateName(user.getLastName())
 				&& validateAadhar(user.getAadhar()) && validateDOB(user.getDOB())
-				&& validatePhoneNumber(user.getPhoneNumber()) && validateAddress(user.getAddress())) {
-
+				&& validatePhoneNumber(user.getPhoneNumber())) {
+			validateAddress(user.getAddress());
 		}
 	}
 
@@ -41,9 +45,9 @@ public class UserValidator {
 	}
 
 	public static boolean validateAddress(String address) throws ValidationException {
-
-		if (address.trim() == null)
+		if (address == null || address.trim().isEmpty()) {
 			throw new ValidationException("Name is not valid - Name cannot be empty");
+		}
 
 		return true;
 	}
@@ -62,7 +66,7 @@ public class UserValidator {
 					"Password is not valid: Please ensure your password contains at least one lowercase letter, one uppercase letter, one digit, one special character (@#$%^&+=), one non-whitespace character, and is at least 8 characters long.");
 		}
 
-		return match;
+		return match; 
 	}
 
 	public static boolean validateEmail(String email) throws ValidationException {
@@ -94,9 +98,9 @@ public class UserValidator {
 		LocalDate currentDate = LocalDate.now();
 		LocalDate minimumValidDob = currentDate.minus(Period.ofYears(15));
 		if (date.isAfter(minimumValidDob)) {
-			throw new ValidationException("DateOfBirth is not valid - your age should greater than 15");
+			throw new ValidationException("DateOfBirth is not valid - your age should be greater than 15");
 		} else {
-			return true;
+			return true; 
 		}
 
 	}
@@ -131,5 +135,8 @@ public class UserValidator {
 		return isMatch;
 
 	}
+	
+	
+	
 
 }

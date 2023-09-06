@@ -11,7 +11,7 @@ public class UserService {
 	public boolean registerUser(User user) throws ServiceException {
 		UserDAO userDAO = new UserDAO();
 		try {
-			UserValidator.validateUser(user);
+			UserValidator.validateUser(user); 
 			userDAO.createUser(user);
 			return true;
 		} catch (DAOException | ValidationException e) {
@@ -21,11 +21,11 @@ public class UserService {
 
 	public User logInUser(User user) throws ServiceException {
 		UserDAO userDAO = new UserDAO();
-		try {
+		try { 
 
 			User gettedUser = userDAO.getUserByEmail(user.getEmail());
 			if (gettedUser == null)
-				throw new ServiceException("User is not registered");
+				throw new DAOException("User is not registered");
 			if (!user.getPassword().equals(gettedUser.getPassword())) {
 				throw new ServiceException("Login Faild - password mismatch");
 			}

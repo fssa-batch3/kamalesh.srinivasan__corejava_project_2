@@ -6,6 +6,9 @@ import java.sql.SQLException;
 import com.fssa.needstobedone.model.User;
 
 public class ResultSetUtils {
+	private ResultSetUtils () {
+		// Default constructor
+	}
 	public static User buildUserFromResultSet(ResultSet rs) throws SQLException {
 		User user = new User();
 		user.setEmail(rs.getString("email"));
