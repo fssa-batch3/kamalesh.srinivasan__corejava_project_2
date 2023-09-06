@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test;
 import com.fssa.needstobedone.exception.ValidationException;
 import com.fssa.needstobedone.validation.UserValidator;
 
-public class TestUserValidation {
+class TestUserValidation {
 
 	@Test
 	void testValidateNameWithValidName() {

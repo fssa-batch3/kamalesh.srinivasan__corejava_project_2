@@ -9,31 +9,31 @@ public class User {
 	private String firstName;
 	private String lastName;
 	private boolean isOwner;
-	private LocalDate DOB;
+	private LocalDate dateOfBirth;
 	private long phoneNumber;
 	private long aadhar;
 	private String address;
 	private int userId;
 
 	public User(String email, String password, String firstName, String lastName, boolean isOwner, long phoneNumber,
-			LocalDate DateOfBirth, long aadhar, String address) {
+			LocalDate dateOfBirth, long aadhar, String address) {
 		this.email = email;
 		this.password = password;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.isOwner = isOwner;
-		this.DOB = DateOfBirth;
+		this.dateOfBirth = dateOfBirth;
 		this.phoneNumber = phoneNumber;
 		this.aadhar = aadhar;
 		this.address = address;
 	}
 
 	public LocalDate getDOB() {
-		return DOB;
+		return dateOfBirth;
 	}
 
 	public void setDOB(LocalDate dOB) {
-		DOB = dOB;
+		dateOfBirth = dOB;
 	}
 
 	public void setisOwner(boolean isOwner) {
@@ -109,7 +109,7 @@ public class User {
 	@Override
 	public String toString() {
 		return "User [email=" + email + ", password=" + password + ", firstName=" + firstName + ", lastName=" + lastName
-				+ ", isOwner=" + isOwner + ", DOB=" + DOB + ", phoneNumber=" + phoneNumber + ", aadhar=" + aadhar
+				+ ", isOwner=" + isOwner + ", DOB=" + dateOfBirth + ", phoneNumber=" + phoneNumber + ", aadhar=" + aadhar
 				+ ", address=" + address + ", userId=" + userId + "]";
 	}
 

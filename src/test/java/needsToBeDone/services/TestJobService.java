@@ -25,7 +25,7 @@ class TestJobService {
 	}
 
 	@Test
-	public void testCreateValidJob() {
+	void testCreateValidJob() {
 		Job validJob = new Job("FrontEnd", 200000, "kamalesh.srinivasan@fssa.freshworks.com");
 		try {
 			assertTrue(jobService.createJob(validJob));

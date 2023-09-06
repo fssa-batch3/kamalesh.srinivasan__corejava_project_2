@@ -22,8 +22,6 @@ public class JobDAO {
 				PreparedStatement statement = connection.prepareStatement(insertQuery);) {
 
 			String jobId = UUID.randomUUID().toString();
-			System.out.println(jobId);
-			System.out.println(job.getEmail());
 
 			// Prepare SQL statement
 
@@ -68,9 +66,7 @@ public class JobDAO {
 		String selectQuery = "SELECT * FROM job WHERE jobid = ? AND isDeleted = false";
 		try(Connection connection = ConnectionUtil.getConnection();
 				PreparedStatement statement = connection.prepareStatement(selectQuery);) {
-            System.out.println(id);
 			statement.setString(1, id);
-
 			// Execute the query
 			ResultSet resultSet = statement.executeQuery();
 			while (resultSet.next()) {
@@ -80,7 +76,6 @@ public class JobDAO {
 				job.setPrice(resultSet.getInt("price"));
 				arr.add(job); 
 			}
-			System.out.println(arr.toString());
 			resultSet.close();
 			return arr.get(0); 
 		} catch (SQLException | IndexOutOfBoundsException e) {
