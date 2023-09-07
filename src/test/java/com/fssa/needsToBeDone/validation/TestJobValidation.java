@@ -1,4 +1,4 @@
-package needsToBeDone.validation;
+package com.fssa.needsToBeDone.validation;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
