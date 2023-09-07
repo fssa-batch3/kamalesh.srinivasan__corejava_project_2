@@ -14,7 +14,7 @@ public class UserValidator {
 	
 	public UserValidator() {
 		// Default Constructor
-	}
+	} 
 
 	public static void validateUser(User user) throws ValidationException {
 
@@ -28,9 +28,12 @@ public class UserValidator {
 
 	public static boolean validateName(String name) throws ValidationException {
 		boolean match = false;
+		if(name.trim().isEmpty()) {
+			throw new ValidationException("Name is not valid - Name cannot be empty");
+		}
 
 		if (name == null) 
-			throw new ValidationException("Name is not valid - Name cannot be empty");
+			return false;
 
 		String regex = "^[A-Za-z]{1,30}$";
 		Pattern p = Pattern.compile(regex);
@@ -45,18 +48,23 @@ public class UserValidator {
 	}
 
 	public static boolean validateAddress(String address) throws ValidationException {
-		if (address == null || address.trim().isEmpty()) {
+		if (address.trim().isEmpty()) {
 			throw new ValidationException("Name is not valid - Name cannot be empty");
 		}
+		if(address == null )
+			return false;
 
 		return true;
 	}
 
 	public static boolean validatePassword(String password) throws ValidationException {
 		boolean match = false;
+		
+		if(password.isEmpty())
+			throw new ValidationException("Password is not valid - Password cannot be empty");
 
 		if (password == null)
-			throw new ValidationException("Password is not valid - Password cannot be empty");
+			return false;
 
 		String passwordPattern = "(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@#$%^&+=])(?=.*[^\\s]).{8,}$";
 		match = Pattern.matches(passwordPattern, password);
@@ -74,6 +82,10 @@ public class UserValidator {
 
 		if (email == null)
 			throw new ValidationException("Email is not valid - email cannot be empty");
+		
+		if(email.isEmpty())
+			return false;
+		
 		String regex = "^.*@.*\\..*$";
 		isMatch = Pattern.matches(regex, email);
 		if (!isMatch) {
@@ -102,6 +114,7 @@ public class UserValidator {
 		} else {
 			return true; 
 		}
+		
 
 	}
 
@@ -109,6 +122,10 @@ public class UserValidator {
 		boolean isMatch = false;
 
 		String aadharNumber = String.valueOf(aadhar);
+		
+		if(aadharNumber.trim().isEmpty())
+			return false;
+		
 		if (aadharNumber == null)
 			throw new ValidationException("Aadhar number is not valid - Aadhar number cannot be empty");
 		String regex = "^\\d{12}$";
@@ -124,9 +141,14 @@ public class UserValidator {
 		boolean isMatch = false;
 
 		String phoneNumber = String.valueOf(l);
+		
 
 		if (phoneNumber == null)
 			throw new ValidationException("Phone number is not valid - Phone number cannot be empty");
+		
+		if(phoneNumber.isEmpty())
+			return false;
+		
 		String regex = "^\\d{10}$";
 		isMatch = Pattern.matches(regex, phoneNumber);
 		if (!isMatch) {

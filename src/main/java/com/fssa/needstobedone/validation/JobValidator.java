@@ -12,14 +12,22 @@ public class JobValidator {
 		if (job != null && validateTitle(job.getTitle())) {
 			validatePrice(job.getPrice());
 		}
- 
+
 	}
 
 	public static boolean validateTitle(String title) throws ValidationException {
 		boolean match = false;
 
-		if (title == null)
+		if (title == null) {
+			return false;
+
+		}
+
+		if (title.trim().isEmpty()) {
 			throw new ValidationException("Job title is not valid - job title cannot be empty");
+
+		}
+
 		String regex = "^[A-Za-z ]+$";
 		Pattern p = Pattern.compile(regex);
 		Matcher m = p.matcher(title);
@@ -32,6 +40,9 @@ public class JobValidator {
 	}
 
 	public static boolean validatePrice(int price) throws ValidationException {
+		if(price < 0) {
+			return false;
+		}
 		if (price == 0)
 			throw new ValidationException("Job Price is not valid - job price cannot be 0");
 		if (price < 0) {
@@ -40,6 +51,5 @@ public class JobValidator {
 		}
 		return true;
 	}
-
 
 }
