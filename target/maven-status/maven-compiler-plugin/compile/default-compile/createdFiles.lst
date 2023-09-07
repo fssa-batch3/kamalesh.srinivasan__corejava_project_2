@@ -1,0 +1,14 @@
+com\fssa\needstobedone\exception\DAOException.class
+com\fssa\needstobedone\exception\ValidationException.class
+com\fssa\needstobedone\model\Job.class
+com\fssa\needstobedone\exception\ServiceException.class
+com\fssa\needstobedone\dao\JobDAO.class
+com\fssa\needstobedone\validation\UserValidator.class
+com\fssa\needstobedone\utils\ResultSetUtils.class
+com\fssa\needstobedone\utils\PasswordUtil.class
+com\fssa\needstobedone\validation\JobValidator.class
+com\fssa\needstobedone\utils\ConnectionUtil.class
+com\fssa\needstobedone\services\UserService.class
+com\fssa\needstobedone\dao\UserDAO.class
+com\fssa\needstobedone\model\User.class
+com\fssa\needstobedone\services\JobService.class
