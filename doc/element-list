@@ -1,0 +1,8 @@
+com.fssa.needstobedone.dao
+com.fssa.needstobedone.exception
+com.fssa.needstobedone.model
+com.fssa.needstobedone.services
+com.fssa.needstobedone.utils
+com.fssa.needstobedone.validation
+needsToBeDone.services
+needsToBeDone.validation

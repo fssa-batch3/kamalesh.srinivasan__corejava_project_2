@@ -1,73 +1,147 @@
 package com.fssa.needstobedone.model;
 
+/**
+ * The Job class represents job-related data.
+ */
 public class Job {
 
-	private String title;
-	private int price;
-	private String email;
-	private String jobid;
-	private Boolean isDeleted;
+    private String title;
+    private int price;
+    private String email;
+    private String jobid;
+    private Boolean isDeleted;
 
-	public Job() {
-		// Default Constructor
-	}
+    /**
+     * Default constructor for the Job class.
+     */
+    public Job() {
+        // Default Constructor
+    }
 
-	public Job(String title, int price, String email) {
-		this.title = title;
-		this.price = price;
-		this.email = email;
-	}
+    /**
+     * Constructs a new Job with the specified title, price, and email.
+     *
+     * @param title The title of the job.
+     * @param price The price of the job.
+     * @param email The email associated with the job.
+     */
+    public Job(String title, int price, String email) {
+        this.title = title;
+        this.price = price;
+        this.email = email;
+    }
 
-	public Job(int price, String jobid, String title) {
-		this.title = title;
-		this.price = price;
-		this.jobid = jobid;
-	}
+    /**
+     * Constructs a new Job with the specified price, job ID, and title.
+     *
+     * @param price The price of the job.
+     * @param jobid The unique job ID.
+     * @param title The title of the job.
+     */
+    public Job(int price, String jobid, String title) {
+        this.title = title;
+        this.price = price;
+        this.jobid = jobid;
+    }
 
-	public Boolean getIsDeleted() {
-		return isDeleted;
-	}
+    /**
+     * Gets the value of the "isDeleted" flag, indicating whether the job is deleted.
+     *
+     * @return true if the job is deleted, false otherwise.
+     */
+    public Boolean getIsDeleted() {
+        return isDeleted;
+    }
 
-	public void setIsDeleted(Boolean isDeleted) {
-		this.isDeleted = isDeleted;
-	}
+    /**
+     * Sets the "isDeleted" flag to indicate whether the job is deleted.
+     *
+     * @param isDeleted true if the job is deleted, false otherwise.
+     */
+    public void setIsDeleted(Boolean isDeleted) {
+        this.isDeleted = isDeleted;
+    }
 
-	public String getJobid() {
-		return jobid;
-	}
+    /**
+     * Gets the job ID.
+     *
+     * @return The job ID.
+     */
+    public String getJobid() {
+        return jobid;
+    }
 
-	public void setJobid(String jobid) {
-		this.jobid = jobid;
-	}
+    /**
+     * Sets the job ID.
+     *
+     * @param jobid The job ID to set.
+     */
+    public void setJobid(String jobid) {
+        this.jobid = jobid;
+    }
 
-	public String getTitle() {
-		return title;
-	}
+    /**
+     * Gets the job title.
+     *
+     * @return The job title.
+     */
+    public String getTitle() {
+        return title;
+    }
 
-	public void setTitle(String title) {
-		this.title = title;
-	}
+    /**
+     * Sets the job title.
+     *
+     * @param title The job title to set.
+     */
+    public void setTitle(String title) {
+        this.title = title;
+    }
 
-	public int getPrice() {
-		return price;
-	}
+    /**
+     * Gets the job price.
+     *
+     * @return The job price.
+     */
+    public int getPrice() {
+        return price;
+    }
 
-	public void setPrice(int price) {
-		this.price = price;
-	}
+    /**
+     * Sets the job price.
+     *
+     * @param price The job price to set.
+     */
+    public void setPrice(int price) {
+        this.price = price;
+    }
 
-	public String getEmail() {
-		return email;
-	}
+    /**
+     * Gets the email associated with the job.
+     *
+     * @return The email associated with the job.
+     */
+    public String getEmail() {
+        return email;
+    }
 
-	public void setEmail(String email) {
-		this.email = email;
-	}
+    /**
+     * Sets the email associated with the job.
+     *
+     * @param email The email to set.
+     */
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
-	@Override
-	public String toString() {
-		return "Job [title=" + title + ", price=" + price + ", email=" + email + ", jobid=" + jobid + ", isDeleted="
-				+ isDeleted + "]";
-	}
-
+    /**
+     * Generates a string representation of the Job object.
+     *
+     * @return A string representation of the Job object.
+     */
+    @Override
+    public String toString() {
+        return "Job [title=" + title + ", price=" + price + ", email=" + email + ", jobid=" + jobid + ", isDeleted="
+                + isDeleted + "]";
+    }
 }
