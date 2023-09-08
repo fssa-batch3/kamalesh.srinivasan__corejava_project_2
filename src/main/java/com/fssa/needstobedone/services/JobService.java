@@ -14,6 +14,7 @@ import com.fssa.needstobedone.validation.JobValidator;
  */
 public class JobService {
 
+	JobValidator jobValidator = new JobValidator();
     /**
      * Creates a new job.
      *
@@ -24,7 +25,7 @@ public class JobService {
     public boolean createJob(Job job) throws ServiceException {
         JobDAO jobDAO = new JobDAO();
         try {
-            JobValidator.validateJob(job);
+        	jobValidator.validateJob(job);
             if (!jobDAO.checkEmail(job.getEmail())) {
                 throw new DAOException("Email is not found");
             }
@@ -70,7 +71,6 @@ public class JobService {
                 throw new DAOException("No Jobs Found");
             }
         } catch (DAOException e) {
-            e.printStackTrace();
             throw new ServiceException(e.getMessage());
         }
     }
@@ -85,7 +85,7 @@ public class JobService {
     public boolean updateJobs(Job job) throws ServiceException {
         JobDAO jobDAO = new JobDAO();
         try {
-            JobValidator.validateJob(job);
+        	jobValidator.validateJob(job);
             if (!jobDAO.checkJobId(job.getJobid())) {
                 throw new DAOException("JobId is not valid");
             }

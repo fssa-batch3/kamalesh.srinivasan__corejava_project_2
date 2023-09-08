@@ -22,9 +22,10 @@ public class UserService {
 	 * @throws ServiceException If there is an issue registering the user.
 	 */
 	public boolean registerUser(User user) throws ServiceException {
+		UserValidator userValidator = new UserValidator();
 		UserDAO userDAO = new UserDAO();
 		try {
-			UserValidator.validateUser(user);
+			userValidator.validateUser(user);
 			String newPassword = PasswordUtil.hashPassword(user.getPassword());
 			user.setPassword(newPassword);
 			System.out.println(user.getPassword());

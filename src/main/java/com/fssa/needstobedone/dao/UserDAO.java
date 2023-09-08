@@ -9,6 +9,7 @@ import java.sql.SQLException;
 import com.fssa.needstobedone.exception.DAOException;
 import com.fssa.needstobedone.model.User;
 import com.fssa.needstobedone.utils.ConnectionUtil;
+import com.fssa.needstobedone.utils.ResultSetUtils;
 
 /**
  * The UserDAO class provides methods for interacting with the database
@@ -69,7 +70,7 @@ public class UserDAO {
 
             try (ResultSet rs = pst.executeQuery()) {
                 if (rs.next()) {
-                    user = buildUserFromResultSet(rs);
+                    user = ResultSetUtils.buildUserFromResultSet(rs);
                 }
             }
 
@@ -96,7 +97,7 @@ public class UserDAO {
 
             try (ResultSet rs = pst.executeQuery()) {
                 if (rs.next()) {
-                    user = buildUserFromResultSet(rs);
+                    user = ResultSetUtils.buildUserFromResultSet(rs);
                 }
             }
             return (user == null);
@@ -106,24 +107,5 @@ public class UserDAO {
         }
     }
 
-    /**
-     * Builds a User object from a ResultSet.
-     *
-     * @param rs The ResultSet containing user data.
-     * @return The User object built from the ResultSet.
-     * @throws SQLException If there was an error retrieving data from the ResultSet.
-     */
-    private User buildUserFromResultSet(ResultSet rs) throws SQLException {
-        User user = new User();
-        user.setEmail(rs.getString("email"));
-        user.setPassword(rs.getString("password"));
-        user.setFirstName(rs.getString("firstname"));
-        user.setLastName(rs.getString("lastname"));
-        user.setisOwner(rs.getBoolean("isOwner"));
-        user.setPhoneNumber(rs.getLong("phone_number"));
-        user.setDOB(rs.getDate("dob").toLocalDate());
-        user.setAddress(rs.getString("address"));
-        user.setAadhar(rs.getLong("aadhar"));
-        return user;
-    }
+
 }

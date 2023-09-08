@@ -26,7 +26,7 @@ class TestJobService {
 
 	@Test
 	void testCreateValidJob() {
-		Job validJob = new Job("FrontEnd", 200000, "kamalesh.srinivasan@fssa.freshworks.com");
+		Job validJob = new Job("FrontEnd", 200000, "kishor@gmail.com");
 		try {
 			assertTrue(jobService.createJob(validJob));
 		} catch (ServiceException e) {

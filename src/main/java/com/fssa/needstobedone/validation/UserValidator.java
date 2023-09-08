@@ -21,7 +21,7 @@ public class UserValidator {
      * @param user The user to be validated.
      * @throws ValidationException If validation fails.
      */
-    public static void validateUser(User user) throws ValidationException {
+    public void validateUser(User user) throws ValidationException {
         if (user != null && validatePassword(user.getPassword()) && validateEmail(user.getEmail())
                 && validateName(user.getFirstName()) && validateName(user.getLastName())
                 && validateAadhar(user.getAadhar()) && validateDOB(user.getDOB())
@@ -37,7 +37,7 @@ public class UserValidator {
      * @return true if the name is valid, false otherwise.
      * @throws ValidationException If validation fails.
      */
-    public static boolean validateName(String name) throws ValidationException {
+    public boolean validateName(String name) throws ValidationException {
         boolean match = false;
 
         if (name == null)
@@ -62,7 +62,7 @@ public class UserValidator {
      * @return true if the address is valid, false otherwise.
      * @throws ValidationException If validation fails.
      */
-    public static boolean validateAddress(String address) throws ValidationException {
+    public boolean validateAddress(String address) throws ValidationException {
         if (address == null || address.trim().isEmpty()) {
             throw new ValidationException("Address is not valid - Address cannot be empty");
         }
@@ -77,21 +77,19 @@ public class UserValidator {
      * @return true if the password is valid, false otherwise.
      * @throws ValidationException If validation fails.
      */
-    public static boolean validatePassword(String password) throws ValidationException {
-        boolean match = false;
-
-        if (password == null)
-            throw new ValidationException("Password is not valid - Password cannot be empty");
-
-        String passwordPattern = "(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@#$%^&+=])(?=.*[^\\s]).{8,}$";
-        match = Pattern.matches(passwordPattern, password);
-
-        if (!match) {
-            throw new ValidationException(
-                    "Password is not valid: Please ensure your password contains at least one lowercase letter, one uppercase letter, one digit, one special character (@#$%^&+=), one non-whitespace character, and is at least 8 characters long.");
-        }
-
-        return match;
+    public boolean validatePassword(String password) throws ValidationException {
+		if (password == null) {
+			throw new ValidationException("Password cannot be empty");
+		}
+		password = password.trim();
+		if (password.isEmpty()) {
+			throw new ValidationException("Password cannot be empty");
+		} else if (password.length() < 8) {
+			throw new ValidationException("Password is less than the expected length of 8 characters");
+		} else if (!Pattern.compile("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).+$").matcher(password).matches()) {
+			throw new ValidationException("Password must contain at least one uppercase letter, one lowercase letter, and one digit");
+		}
+		return true;
     }
 
     /**
@@ -101,18 +99,18 @@ public class UserValidator {
      * @return true if the email is valid, false otherwise.
      * @throws ValidationException If validation fails.
      */
-    public static boolean validateEmail(String email) throws ValidationException {
+    public boolean validateEmail(String email) throws ValidationException {
         boolean isMatch = false;
 
         if (email == null)
             throw new ValidationException("Email is not valid - email cannot be empty");
-        String regex = "^.*@.*\\..*$";
-        isMatch = Pattern.matches(regex, email);
+        String regex = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$";
+        isMatch = Pattern.compile(regex).matcher(email).matches();
         if (!isMatch) {
             throw new ValidationException("Email is not valid - email format should be example@gmail.com");
         }
 
-        UserDAO userDAO = new UserDAO();
+        UserDAO userDAO = new UserDAO(); 
         try {
             if (!userDAO.checkUserByEmail(email))
                 throw new ValidationException("Email already exists!!!");
@@ -129,7 +127,7 @@ public class UserValidator {
      * @return true if the DOB is valid, false otherwise.
      * @throws ValidationException If validation fails.
      */
-    public static boolean validateDOB(LocalDate date) throws ValidationException {
+    public boolean validateDOB(LocalDate date) throws ValidationException {
 
         if (date == null)
             throw new ValidationException("DateOfBirth is not valid - DateOfBirth cannot be empty");
@@ -150,7 +148,7 @@ public class UserValidator {
      * @return true if the Aadhar number is valid, false otherwise.
      * @throws ValidationException If validation fails.
      */
-    public static boolean validateAadhar(long aadhar) throws ValidationException {
+    public boolean validateAadhar(long aadhar) throws ValidationException {
         boolean isMatch = false;
 
         String aadharNumber = String.valueOf(aadhar);
@@ -171,7 +169,7 @@ public class UserValidator {
      * @return true if the phone number is valid, false otherwise.
      * @throws ValidationException If validation fails.
      */
-    public static boolean validatePhoneNumber(long phoneNumber) throws ValidationException {
+    public boolean validatePhoneNumber(long phoneNumber) throws ValidationException {
         boolean isMatch = false;
 
         String phoneNumberStr = String.valueOf(phoneNumber);

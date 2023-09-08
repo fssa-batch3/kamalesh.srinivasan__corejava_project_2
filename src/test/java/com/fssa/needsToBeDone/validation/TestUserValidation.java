@@ -1,8 +1,8 @@
 package com.fssa.needsToBeDone.validation;
 
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.fail;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.time.LocalDate;
 
@@ -13,221 +13,152 @@ import com.fssa.needstobedone.validation.UserValidator;
 
 class TestUserValidation {
 
+	UserValidator userValidator = new UserValidator();
+	
 	@Test
 	void testValidateNameWithValidName() {
-		try {
-			UserValidator.validateName("JohnDoe");
-			assertTrue(true);
-		} catch (ValidationException e) {
-			fail("ValidationException occurred: " + e.getMessage());
-		}
+		assertDoesNotThrow(() -> userValidator.validateName("JohnDoe"));
+
 	}
 
 	@Test
 	void testValidateNameWithInvalidName() {
-		try {
-			UserValidator.validateName("123");
-			fail("Expected ValidationException, but none was thrown");
-		} catch (ValidationException e) {
-			assertEquals(
-					"Name is not valid - Name should have only letters (A-Z or a-z) and be 1 to 30 characters long.",
-					e.getMessage());
-		}
+		ValidationException result = assertThrows(ValidationException.class, () -> userValidator.validateName("123"));
+		assertEquals("Name is not valid - Name should have only letters (A-Z or a-z) and be 1 to 30 characters long.",
+				result.getMessage());
 	}
 
 	@Test
 	void testValidateAddressWithValidAddress() {
-		try {
-			UserValidator.validateAddress("123 Main St");
-			assertTrue(true);
-		} catch (ValidationException e) {
-			fail("ValidationException occurred: " + e.getMessage());
-		}
+		assertDoesNotThrow(() -> userValidator.validateAddress("123 Main St"));
+
 	}
 
 	@Test
 	void testValidateAddressWithInvalidAddress() {
-		try {
-			UserValidator.validateAddress(null);
-			fail("Expected ValidationException, but none was thrown");
-		} catch (ValidationException e) {
-			assertEquals("Name is not valid - Name cannot be empty", e.getMessage());
-		}
+		ValidationException result = assertThrows(ValidationException.class, () -> userValidator.validateAddress(null));
+		assertEquals("Address is not valid - Address cannot be empty", result.getMessage());
 	}
 
 	@Test
 	void testValidatePasswordWithValidPassword() {
-		try {
-			UserValidator.validatePassword("Test@123");
-			assertTrue(true);
-		} catch (ValidationException e) {
-			fail("ValidationException occurred: " + e.getMessage());
-		}
+		assertDoesNotThrow(() -> userValidator.validatePassword("Test@123"));
+
 	}
 
 	@Test
 	void testValidatePasswordWithInvalidPassword() {
-		try {
-			UserValidator.validatePassword("weakpass");
-			fail("Expected ValidationException, but none was thrown");
-		} catch (ValidationException e) {
-			assertEquals(
-					"Password is not valid: Please ensure your password contains at least one lowercase letter, one uppercase letter, one digit, one special character (@#$%^&+=), one non-whitespace character, and is at least 8 characters long.",
-					e.getMessage());
-		}
+		ValidationException result = assertThrows(ValidationException.class,
+				() -> userValidator.validatePassword("weakpass"));
+
+		assertEquals(
+				"Password must contain at least one uppercase letter, one lowercase letter, and one digit",
+				result.getMessage());
 	}
 
 	@Test
 	void testValidateEmailWithValidEmail() {
-		try {
-			UserValidator.validateEmail("example@example.com");
-			assertTrue(true);
-		} catch (ValidationException e) {
-			fail("ValidationException occurred: " + e.getMessage());
-		}
+		assertDoesNotThrow(() -> userValidator.validateEmail("example@example.com"));
+
 	}
 
 	@Test
 	void testValidateEmailWithInvalidEmail() {
-		try {
-			UserValidator.validateEmail("invalid_email");
-			fail("Expected ValidationException, but none was thrown");
-		} catch (ValidationException e) {
-			assertEquals("Email is not valid - email format should be example@gmail.com", e.getMessage());
-		}
+		ValidationException result = assertThrows(ValidationException.class,
+				() -> userValidator.validateEmail("invalid_email"));
+
+		assertEquals("Email is not valid - email format should be example@gmail.com", result.getMessage());
 	}
 
 	@Test
 	void testValidateDOBWithValidDOB() {
-		try {
-			UserValidator.validateDOB(LocalDate.now().minusYears(20)); // Assuming the user is 20 years old
-			assertTrue(true);
-		} catch (ValidationException e) {
-			fail("ValidationException occurred: " + e.getMessage());
-		}
+		assertDoesNotThrow(() -> userValidator.validateDOB(LocalDate.now().minusYears(20)));
+
 	}
 
 	@Test
 	void testValidateDOBWithInvalidDOB() {
-		try {
-			UserValidator.validateDOB(LocalDate.now());
-			fail("Expected ValidationException, but none was thrown");
-		} catch (ValidationException e) {
-			assertEquals("DateOfBirth is not valid - your age should be greater than 15", e.getMessage());
-		}
+		ValidationException result = assertThrows(ValidationException.class,
+				() -> userValidator.validateDOB(LocalDate.now()));
+
+		assertEquals("DateOfBirth is not valid - your age should be greater than 15", result.getMessage());
 	}
 
 	@Test
 	void testValidateAadharWithValidAadhar() {
-		try {
-			UserValidator.validateAadhar(123456789012L);
-			assertTrue(true);
-		} catch (ValidationException e) {
-			fail("ValidationException occurred: " + e.getMessage());
-		}
+		assertDoesNotThrow(() -> userValidator.validateAadhar(123456789012L));
+
 	}
 
 	@Test
 	void testValidateAadharWithInvalidAadhar() {
-		try {
-			UserValidator.validateAadhar(12345L);
-			fail("Expected ValidationException, but none was thrown");
-		} catch (ValidationException e) {
-			assertEquals("Aadhaar number is not valid - Aadhaar number should be a 12-digit number.", e.getMessage());
-		}
+		ValidationException result = assertThrows(ValidationException.class,
+				() -> userValidator.validateAadhar(12345L));
+
+		assertEquals("Aadhaar number is not valid - Aadhaar number should be a 12-digit number.", result.getMessage());
 	}
 
 	@Test
 	void testValidatePhoneNumberWithValidPhoneNumber() {
-		try {
-			UserValidator.validatePhoneNumber(1234567890L);
-			assertTrue(true);
-		} catch (ValidationException e) {
-			fail("ValidationException occurred: " + e.getMessage());
-		}
+		assertDoesNotThrow(() -> userValidator.validatePhoneNumber(1234567890L));
+
 	}
 
 	@Test
 	void testValidatePhoneNumberWithInvalidPhoneNumber() {
-		try {
-			UserValidator.validatePhoneNumber(12345L);
-			fail("Expected ValidationException, but none was thrown");
-		} catch (ValidationException e) {
-			assertEquals("Phone number is not valid - Phone number should be a 10-digit number.", e.getMessage());
-		}
+		ValidationException result = assertThrows(ValidationException.class,
+				() -> userValidator.validatePhoneNumber(12345L));
+		assertEquals("Phone number is not valid - Phone number should be a 10-digit number.", result.getMessage());
 	}
 
 	@Test
 	void testValidateNameWithEmptyName() {
-		try {
-			UserValidator.validateName("");
-			fail("Expected ValidationException, but none was thrown");
-		} catch (ValidationException e) {
-			assertEquals(
-					"Name is not valid - Name should have only letters (A-Z or a-z) and be 1 to 30 characters long.",
-					e.getMessage());
-		}
+		ValidationException result = assertThrows(ValidationException.class, () -> userValidator.validateName(""));
+
+		assertEquals("Name is not valid - Name should have only letters (A-Z or a-z) and be 1 to 30 characters long.",
+				result.getMessage());
 	}
 
 	@Test
 	void testValidateAddressWithEmptyAddress() {
-		try {
-			UserValidator.validateAddress("");
-			fail("Expected ValidationException, but none was thrown");
-		} catch (ValidationException e) {
-			assertEquals("Name is not valid - Name cannot be empty", e.getMessage());
-		}
+		ValidationException result = assertThrows(ValidationException.class, () -> userValidator.validateAddress(""));
+
+		assertEquals("Address is not valid - Address cannot be empty", result.getMessage());
 	}
 
 	@Test
 	void testValidatePasswordWithEmptyPassword() {
-		try {
-			UserValidator.validatePassword("");
-			fail("Expected ValidationException, but none was thrown");
-		} catch (ValidationException e) {
-			assertEquals(
-					"Password is not valid: Please ensure your password contains at least one lowercase letter, one uppercase letter, one digit, one special character (@#$%^&+=), one non-whitespace character, and is at least 8 characters long.",
-					e.getMessage());
-		}
+		ValidationException result = assertThrows(ValidationException.class, () -> userValidator.validatePassword(""));
+
+		assertEquals(
+				"Password is not valid: Please ensure your password contains at least one lowercase letter, one uppercase letter, one digit, one special character (@#$%^&+=), one non-whitespace character, and is at least 8 characters long.",
+				result.getMessage());
 	}
 
 	@Test
 	void testValidateEmailWithEmptyEmail() {
-		try {
-			UserValidator.validateEmail("");
-			fail("Expected ValidationException, but none was thrown");
-		} catch (ValidationException e) {
-			assertEquals("Email is not valid - email format should be example@gmail.com", e.getMessage());
-		}
+		ValidationException result = assertThrows(ValidationException.class, () -> userValidator.validateEmail(""));
+		assertEquals("Email is not valid - email format should be example@gmail.com", result.getMessage());
 	}
 
 	@Test
 	void testValidateDOBWithEmptyDOB() {
-		try {
-			UserValidator.validateDOB(null);
-			fail("Expected ValidationException, but none was thrown");
-		} catch (ValidationException e) {
-			assertEquals("DateOfBirth is not valid - DateOfBirth cannot be empty", e.getMessage());
-		}
+		ValidationException result = assertThrows(ValidationException.class, () -> userValidator.validateDOB(null));
+		assertEquals("DateOfBirth is not valid - DateOfBirth cannot be empty", result.getMessage());
 	}
 
 	@Test
 	void testValidateAadharWithEmptyAadhar() {
-		try {
-			UserValidator.validateAadhar(0L);
-			fail("Expected ValidationException, but none was thrown");
-		} catch (ValidationException e) {
-			assertEquals("Aadhaar number is not valid - Aadhaar number should be a 12-digit number.", e.getMessage());
-		}
+		ValidationException result = assertThrows(ValidationException.class, () -> userValidator.validateAadhar(0L));
+
+		assertEquals("Aadhaar number is not valid - Aadhaar number should be a 12-digit number.", result.getMessage());
 	}
 
 	@Test
 	void testValidatePhoneNumberWithEmptyPhoneNumber() {
-		try {
-			UserValidator.validatePhoneNumber(0L);
-			fail("Expected ValidationException, but none was thrown");
-		} catch (ValidationException e) {
-			assertEquals("Phone number is not valid - Phone number should be a 10-digit number.", e.getMessage());
-		}
+		ValidationException result = assertThrows(ValidationException.class,
+				() -> userValidator.validatePhoneNumber(0L));
+
+		assertEquals("Phone number is not valid - Phone number should be a 10-digit number.", result.getMessage());
 	}
 }

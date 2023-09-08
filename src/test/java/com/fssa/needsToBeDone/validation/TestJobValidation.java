@@ -12,11 +12,13 @@ import com.fssa.needstobedone.model.Job;
 import com.fssa.needstobedone.validation.JobValidator;
 
 class TestJobValidation {
-
+	
+	JobValidator jobValidator = new JobValidator();
+	
 	@Test
 	void testValidateTitleWithValidTitle() {
 		try {
-			JobValidator.validateTitle("FrontEnd Developer");
+			jobValidator.validateTitle("FrontEnd Developer");
 			assertTrue(true);
 		} catch (ValidationException e) {
 			fail("ValidationException occurred: " + e.getMessage());
@@ -26,7 +28,7 @@ class TestJobValidation {
 	@Test
 	void testValidateTitleWithInvalidTitle() {
 		ValidationException exception = assertThrows(ValidationException.class,
-				() -> JobValidator.validateTitle("123"));
+				() -> jobValidator.validateTitle("123"));
 		assertEquals(
 				"Job title is not valid - Please enter a string containing only alphabetic characters (both uppercase and lowercase) and spaces.",
 				exception.getMessage());
@@ -35,7 +37,7 @@ class TestJobValidation {
 	@Test
 	void testValidatePriceWithValidPrice() {
 		try {
-			JobValidator.validatePrice(100);
+			jobValidator.validatePrice(100);
 			assertTrue(true);
 		} catch (ValidationException e) {
 			fail("ValidationException occurred: " + e.getMessage());
@@ -44,15 +46,15 @@ class TestJobValidation {
 
 	@Test
 	void testValidatePriceWithZeroPrice() {
-		ValidationException exception = assertThrows(ValidationException.class, () -> JobValidator.validatePrice(0));
+		ValidationException exception = assertThrows(ValidationException.class, () -> jobValidator.validatePrice(0));
 		assertEquals("Job Price is not valid - job price cannot be 0", exception.getMessage());
 	}
 
 	@Test
 	void testValidatePriceWithNegativePrice() {
-		ValidationException exception = assertThrows(ValidationException.class, () -> JobValidator.validatePrice(-50));
+		ValidationException exception = assertThrows(ValidationException.class, () -> jobValidator.validatePrice(-50));
 		assertEquals(
-				"Job Price is not valid - Price should be in the format of a positive decimal number with two decimal places(10.99).",
+				"Job Price is not valid - Price should be a positive number",
 				exception.getMessage());
 	}
 
@@ -60,7 +62,7 @@ class TestJobValidation {
 	void testValidateJobWithValidJob() {
 		try {
 			Job validJob = new Job("FrontEnd Developer", 100, null);
-			JobValidator.validateJob(validJob);
+			jobValidator.validateJob(validJob);
 			assertTrue(true);
 		} catch (ValidationException e) {
 			fail("ValidationException occurred: " + e.getMessage());
@@ -70,19 +72,24 @@ class TestJobValidation {
 	@Test
 	void testValidateJobWithInvalidTitle() {
 		ValidationException exception = assertThrows(ValidationException.class, () -> {
-			Job invalidJob = new Job("123", 100, null);
-			JobValidator.validateJob(invalidJob);
+			jobValidator.validateJob(new Job("123", 100, null));
 		});
 		assertEquals(
 				"Job title is not valid - Please enter a string containing only alphabetic characters (both uppercase and lowercase) and spaces.",
+				exception.getMessage());
+	}
+	@Test
+	void testValidateJobWithNullTitle() {
+		ValidationException exception = assertThrows(ValidationException.class, () -> jobValidator.validateJob(new Job(null, 100, null)));
+		assertEquals(
+				"Job title is not valid - job title cannot be empty",
 				exception.getMessage());
 	}
 
 	@Test
 	void testValidateJobWithZeroPrice() {
 		ValidationException exception = assertThrows(ValidationException.class, () -> {
-			Job invalidJob = new Job("FrontEnd Developer", 0, null);
-			JobValidator.validateJob(invalidJob);
+			jobValidator.validateJob(new Job("FrontEnd Developer", 0, null));
 		});
 		assertEquals("Job Price is not valid - job price cannot be 0", exception.getMessage());
 	}
@@ -90,11 +97,10 @@ class TestJobValidation {
 	@Test
 	void testValidateJobWithNegativePrice() {
 		ValidationException exception = assertThrows(ValidationException.class, () -> {
-			Job invalidJob = new Job("FrontEnd Developer", -50, null);
-			JobValidator.validateJob(invalidJob);
+			jobValidator.validateJob(new Job("FrontEnd Developer", -50, null));
 		});
 		assertEquals(
-				"Job Price is not valid - Price should be in the format of a positive decimal number with two decimal places(10.99).",
+				"Job Price is not valid - Price should be a positive number",
 				exception.getMessage());
 	}
 }
