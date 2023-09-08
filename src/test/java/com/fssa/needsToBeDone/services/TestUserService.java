@@ -17,57 +17,58 @@ import com.fssa.needstobedone.services.UserService;
 
 class TestUserService {
 
-    private UserService userService;
- 
-    @BeforeEach
-    void setUp() {
-        userService = new UserService(); 
-    }
- 
-    @Test
-    void testRegisterValidUser() {
+	private UserService userService;
 
-    	LocalDate date = LocalDate.of(2003, 8, 6);
-        User validUser = new User("karthi"+System.nanoTime()+"@gmail.com","Test@123","Kamalesh","Srinivasan",true,9878656754l,date,876567843564l,"Chennai");
-        try {
-            assertTrue(userService.registerUser(validUser)); 
-        } catch (ServiceException e) {
-            fail("ServiceException occurred: " + e.getMessage());
-        }
-    } 
- 
-    @Test
-    void testRegisterInvalidUser() {
-    	LocalDate date = LocalDate.of(2003, 8, 6);
-        User invalidUser = new User("karthi@gmail.com","Test@123","Kamalesh","Srinivasan",true,9878656754l,date,876567843564l,"Chennai");
-        ServiceException result = assertThrows(ServiceException.class, () -> userService.registerUser(invalidUser));
-        assertEquals("Email already exists!!!", result.getMessage());
-    }
- 
-    @Test
-    void testLogInValidUser() {
-        User validUser = new User("kishor@gmail.com","Test@123");
-        try {
-            User loggedInUser = userService.logInUser(validUser);
-            System.out.println(loggedInUser);
-            assertNotNull(loggedInUser);
-        } catch (ServiceException e) {
-            fail("ServiceException occurred: " + e.getMessage());
-        }
-    }
-    
-    
-    @Test
-    void testLogInInValidUserNotRegister() {
-    	User invalidUser = new User("karthi404@gmail.com","Test1234");
-        ServiceException result = assertThrows(ServiceException.class, () -> userService.logInUser(invalidUser));
-        assertEquals("User is not registered", result.getMessage());
-    }
+	@BeforeEach
+	void setUp() {
+		userService = new UserService();
+	}
 
-    @Test
-    void testLogInInvalidUser() {
-        User invalidUser = new User("karthi@gmail.com","Test1234");
-        ServiceException result = assertThrows(ServiceException.class, () -> userService.logInUser(invalidUser));
-        assertEquals("Login Failed - password mismatch", result.getMessage());
-    }
+	@Test
+	void testRegisterValidUser() {
+
+		LocalDate date = LocalDate.of(2003, 8, 6);
+		User validUser = new User("karthi" + System.nanoTime() + "@gmail.com", "Test@123", "Kamalesh", "Srinivasan",
+				true, 9878656754l, date, 876567843564l, "Chennai");
+		try {
+			assertTrue(userService.registerUser(validUser));
+		} catch (ServiceException e) {
+			fail("ServiceException occurred: " + e.getMessage());
+		}
+	}
+
+	@Test
+	void testRegisterInvalidUser() {
+		LocalDate date = LocalDate.of(2003, 8, 6);
+		User invalidUser = new User("karthi@gmail.com", "Test@123", "Kamalesh", "Srinivasan", true, 9878656754l, date,
+				876567843564l, "Chennai");
+		ServiceException result = assertThrows(ServiceException.class, () -> userService.registerUser(invalidUser));
+		assertEquals("Email already exists!!!", result.getMessage());
+	}
+
+	@Test
+	void testLogInValidUser() {
+		User validUser = new User("kishor@gmail.com", "Test@123");
+		try {
+			User loggedInUser = userService.logInUser(validUser);
+			System.out.println(loggedInUser);
+			assertNotNull(loggedInUser);
+		} catch (ServiceException e) {
+			fail("ServiceException occurred: " + e.getMessage());
+		}
+	}
+
+	@Test
+	void testLogInInValidUserNotRegister() {
+		User invalidUser = new User("karthi404@gmail.com", "Test1234");
+		ServiceException result = assertThrows(ServiceException.class, () -> userService.logInUser(invalidUser));
+		assertEquals("User is not registered", result.getMessage());
+	}
+
+	@Test
+	void testLogInInvalidUser() {
+		User invalidUser = new User("karthi@gmail.com", "Test1234");
+		ServiceException result = assertThrows(ServiceException.class, () -> userService.logInUser(invalidUser));
+		assertEquals("Login Failed - password mismatch", result.getMessage());
+	}
 }

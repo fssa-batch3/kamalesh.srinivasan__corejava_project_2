@@ -14,7 +14,7 @@ import com.fssa.needstobedone.validation.UserValidator;
 class TestUserValidation {
 
 	UserValidator userValidator = new UserValidator();
-	
+
 	@Test
 	void testValidateNameWithValidName() {
 		assertDoesNotThrow(() -> userValidator.validateName("JohnDoe"));
@@ -51,8 +51,7 @@ class TestUserValidation {
 		ValidationException result = assertThrows(ValidationException.class,
 				() -> userValidator.validatePassword("weakpass"));
 
-		assertEquals(
-				"Password must contain at least one uppercase letter, one lowercase letter, and one digit",
+		assertEquals("Password must contain at least one uppercase letter, one lowercase letter, and one digit",
 				result.getMessage());
 	}
 

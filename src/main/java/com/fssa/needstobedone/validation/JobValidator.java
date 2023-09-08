@@ -1,6 +1,5 @@
 package com.fssa.needstobedone.validation;
 
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import com.fssa.needstobedone.exception.ValidationException;
@@ -45,7 +44,7 @@ public class JobValidator {
 					"Job title is not valid - Please enter a string containing only alphabetic characters (both uppercase and lowercase) and spaces.");
 		}
 
-		return match;
+		return true;
 	}
 
 	/**

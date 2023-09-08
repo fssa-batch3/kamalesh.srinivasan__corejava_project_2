@@ -9,37 +9,35 @@ import java.sql.SQLException;
  */
 public class ConnectionUtil {
 
-    // Private constructor to prevent instantiation
-    private ConnectionUtil() {
-        // Do nothing (empty constructor)
-    }
+	// Private constructor to prevent instantiation
+	private ConnectionUtil() {
+		// Do nothing (empty constructor)
+	}
 
-    /**
-     * Establishes a connection to the database.
-     *
-     * @return A database connection.
-     * @throws SQLException If a database access error occurs.
-     */
-    public static Connection getConnection() {
-        final String dbUrl;
-        final String dbUser;
-        final String dbPassword;
+	/**
+	 * Establishes a connection to the database.
+	 *
+	 * @return A database connection.
+	 * @throws SQLException If a database access error occurs.
+	 */
+	public static Connection getConnection() {
+		final String dbUrl;
+		final String dbUser;
+		final String dbPassword;
 
-        // Set your database connection parameters here
-        // For example, you can use environment variables or hard-coded values
-         dbUrl = System.getenv("DB_URL");
-         dbUser = System.getenv("DB_USER");
-         dbPassword = System.getenv("DB_PASSWORD");
+		// Set your database connection parameters here
+		// For example, you can use environment variables or hard-coded values
+		dbUrl = System.getenv("DB_URL");
+		dbUser = System.getenv("DB_USER");
+		dbPassword = System.getenv("DB_PASSWORD");
 
- 
-
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            return DriverManager.getConnection(dbUrl, dbUser, dbPassword);
-        } catch (SQLException e) {
-            throw new RuntimeException("Unable to connect to the database", e);
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException("Database driver class not found", e);
-        }
-    }
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			return DriverManager.getConnection(dbUrl, dbUser, dbPassword);
+		} catch (SQLException e) {
+			throw new RuntimeException("Unable to connect to the database", e);
+		} catch (ClassNotFoundException e) {
+			throw new RuntimeException("Database driver class not found", e);
+		}
+	}
 }

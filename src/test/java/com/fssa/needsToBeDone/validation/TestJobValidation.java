@@ -12,9 +12,9 @@ import com.fssa.needstobedone.model.Job;
 import com.fssa.needstobedone.validation.JobValidator;
 
 class TestJobValidation {
-	
+
 	JobValidator jobValidator = new JobValidator();
-	
+
 	@Test
 	void testValidateTitleWithValidTitle() {
 		try {
@@ -53,9 +53,7 @@ class TestJobValidation {
 	@Test
 	void testValidatePriceWithNegativePrice() {
 		ValidationException exception = assertThrows(ValidationException.class, () -> jobValidator.validatePrice(-50));
-		assertEquals(
-				"Job Price is not valid - Price should be a positive number",
-				exception.getMessage());
+		assertEquals("Job Price is not valid - Price should be a positive number", exception.getMessage());
 	}
 
 	@Test
@@ -78,12 +76,12 @@ class TestJobValidation {
 				"Job title is not valid - Please enter a string containing only alphabetic characters (both uppercase and lowercase) and spaces.",
 				exception.getMessage());
 	}
+
 	@Test
 	void testValidateJobWithNullTitle() {
-		ValidationException exception = assertThrows(ValidationException.class, () -> jobValidator.validateJob(new Job(null, 100, null)));
-		assertEquals(
-				"Job title is not valid - job title cannot be empty",
-				exception.getMessage());
+		ValidationException exception = assertThrows(ValidationException.class,
+				() -> jobValidator.validateJob(new Job(null, 100, null)));
+		assertEquals("Job title is not valid - job title cannot be empty", exception.getMessage());
 	}
 
 	@Test
@@ -99,8 +97,6 @@ class TestJobValidation {
 		ValidationException exception = assertThrows(ValidationException.class, () -> {
 			jobValidator.validateJob(new Job("FrontEnd Developer", -50, null));
 		});
-		assertEquals(
-				"Job Price is not valid - Price should be a positive number",
-				exception.getMessage());
+		assertEquals("Job Price is not valid - Price should be a positive number", exception.getMessage());
 	}
 }
