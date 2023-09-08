@@ -28,7 +28,6 @@ public class UserService {
 			userValidator.validateUser(user);
 			String newPassword = PasswordUtil.hashPassword(user.getPassword());
 			user.setPassword(newPassword);
-			System.out.println(user.getPassword());
 			userDAO.createUser(user);
 			return true;
 		} catch (DAOException | ValidationException e) {

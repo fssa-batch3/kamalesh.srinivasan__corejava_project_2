@@ -38,9 +38,7 @@ public class JobValidator {
 		}
 
 		String regex = "^[A-Za-z ]+$";
-		Pattern p = Pattern.compile(regex);
-		Matcher m = p.matcher(title);
-		match = m.matches();
+		match = Pattern.compile(regex).matcher(title).matches();
 
 		if (!match) {
 			throw new ValidationException(
