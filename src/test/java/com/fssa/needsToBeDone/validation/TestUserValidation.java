@@ -130,7 +130,7 @@ class TestUserValidation {
 		ValidationException result = assertThrows(ValidationException.class, () -> userValidator.validatePassword(""));
 
 		assertEquals(
-				"Password is not valid: Please ensure your password contains at least one lowercase letter, one uppercase letter, one digit, one special character (@#$%^&+=), one non-whitespace character, and is at least 8 characters long.",
+				"Password cannot be empty",
 				result.getMessage());
 	}
 

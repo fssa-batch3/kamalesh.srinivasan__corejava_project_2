@@ -10,7 +10,7 @@ import com.fssa.needstobedone.model.Job;
  */
 public class JobValidator {
 
-	/**
+	/** 
 	 * Validates a job object.
 	 *
 	 * @param job The job to be validated.
@@ -18,7 +18,7 @@ public class JobValidator {
 	 */
 	public void validateJob(Job job) throws ValidationException {
 		if (job != null && validateTitle(job.getTitle())) {
-			validatePrice(job.getPrice());
+			validatePrice(job.getPrice()); 
 		}
 	}
 

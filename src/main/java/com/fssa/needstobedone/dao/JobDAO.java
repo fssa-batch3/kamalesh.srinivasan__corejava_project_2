@@ -65,7 +65,7 @@ public class JobDAO {
 				PreparedStatement statement = connection.prepareStatement(selectQuery);) {
 			statement.setString(1, email);
 
-			// Execute the query
+			// Execute the query 
 			ResultSet resultSet = statement.executeQuery();
 
 			boolean userExists = resultSet.next();

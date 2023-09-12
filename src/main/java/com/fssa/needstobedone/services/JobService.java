@@ -15,7 +15,7 @@ import com.fssa.needstobedone.validation.JobValidator;
 public class JobService {
 
 	JobValidator jobValidator = new JobValidator();
-
+ 
 	/**
 	 * Creates a new job.
 	 *

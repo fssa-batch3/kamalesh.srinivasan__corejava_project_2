@@ -19,9 +19,9 @@ public class PasswordUtil {
 	 *
 	 * @param plainPassword The plain password to hash
 	 * @return The hashed password
-	 */
+	 */ 
 	public static String hashPassword(String plainPassword) {
-		return BCrypt.hashpw(plainPassword, BCrypt.gensalt());
+		return BCrypt.hashpw(plainPassword, BCrypt.gensalt()); 
 	}
 
 	/**

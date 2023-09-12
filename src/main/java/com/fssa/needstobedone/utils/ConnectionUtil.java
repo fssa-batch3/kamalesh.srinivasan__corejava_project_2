@@ -27,9 +27,14 @@ public class ConnectionUtil {
 
 		// Set your database connection parameters here
 		// For example, you can use environment variables or hard-coded values
-		dbUrl = System.getenv("DB_URL");
-		dbUser = System.getenv("DB_USER");
-		dbPassword = System.getenv("DB_PASSWORD");
+//		dbUrl = System.getenv("DB_URL");
+//		dbUser = System.getenv("DB_USER");
+//		dbPassword = System.getenv("DB_PASSWORD");
+		
+		// Local Database (example values, replace with your actual database information)
+        dbUrl = "jdbc:mysql://localhost:3306/needstobedone";
+        dbUser = "root";
+        dbPassword = "root";
 
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
