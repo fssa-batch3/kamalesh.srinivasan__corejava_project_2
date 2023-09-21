@@ -15,7 +15,7 @@ import com.fssa.needstobedone.validation.JobValidator;
 public class JobService {
 
 	JobValidator jobValidator = new JobValidator();
- 
+
 	/**
 	 * Creates a new job.
 	 *
@@ -27,9 +27,9 @@ public class JobService {
 		JobDAO jobDAO = new JobDAO();
 		try {
 			jobValidator.validateJob(job);
-			if (!jobDAO.checkEmail(job.getEmail())) {
-				throw new DAOException("Email is not found");
-			}
+//			if (!jobDAO.checkJobId(Integer.toString(job.getUserId()))) {
+//				throw new DAOException("Email is not found");
+//			}
 			jobDAO.createJob(job);
 			return true;
 		} catch (DAOException | ValidationException e) {
@@ -44,12 +44,12 @@ public class JobService {
 	 * @return The job with the specified ID.
 	 * @throws ServiceException If there is an issue listing the job.
 	 */
-	public Job listJobs(String id) throws ServiceException {
+	public Job listJobsByJobId(String id) throws ServiceException {
 		JobDAO jobDAO = new JobDAO();
 		try {
-			Job result = jobDAO.listJobs(id);
-			jobDAO.checkJobId(id);
-			return result;
+			List<Job> result = jobDAO.listJobsByJobId(id);
+			System.out.println(result);
+			return result.get(0);
 		} catch (DAOException e) {
 			throw new ServiceException(e.getMessage());
 		}
@@ -62,10 +62,10 @@ public class JobService {
 	 * @return A list of jobs associated with the specified email.
 	 * @throws ServiceException If there is an issue listing the jobs.
 	 */
-	public List<Job> listJobsByEmail(String email) throws ServiceException {
+	public List<Job> listJobsByUserId(String id) throws ServiceException {
 		JobDAO jobDAO = new JobDAO();
 		try {
-			List<Job> result = jobDAO.listJobsByEmail(email);
+			List<Job> result = (List<Job>) jobDAO.listJobs(id);
 			if (result != null && !result.isEmpty()) {
 				return result;
 			} else {
@@ -112,6 +112,20 @@ public class JobService {
 			}
 			jobDAO.deleteJob(jobId);
 			return true;
+		} catch (DAOException e) {
+			throw new ServiceException(e.getMessage());
+		}
+	}
+
+	public List<Job> listAllJobs() throws ServiceException {
+		JobDAO jobDAO = new JobDAO();
+		try {
+			List<Job> result = (List<Job>) jobDAO.listAllJobs();
+			if (result != null && !result.isEmpty()) {
+				return result;
+			} else {
+				throw new DAOException("No Jobs Found");
+			}
 		} catch (DAOException e) {
 			throw new ServiceException(e.getMessage());
 		}

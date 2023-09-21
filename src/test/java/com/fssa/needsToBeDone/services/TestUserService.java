@@ -29,7 +29,7 @@ class TestUserService {
 
 		LocalDate date = LocalDate.of(2003, 8, 6);
 		User validUser = new User("karthi" + System.nanoTime() + "@gmail.com", "Test@123", "Kamalesh", "Srinivasan",
-				true, 9878656754l, date, 876567843564l, "Chennai");
+				true);
 		try {
 			assertTrue(userService.registerUser(validUser));
 		} catch (ServiceException e) {
@@ -40,8 +40,7 @@ class TestUserService {
 	@Test
 	void testRegisterInvalidUser() {
 		LocalDate date = LocalDate.of(2003, 8, 6);
-		User invalidUser = new User("karthi@gmail.com", "Test@123", "Kamalesh", "Srinivasan", true, 9878656754l, date,
-				876567843564l, "Chennai");
+		User invalidUser = new User("karthi@gmail.com", "Test@123", "Kamalesh", "Srinivasan", true);
 		ServiceException result = assertThrows(ServiceException.class, () -> userService.registerUser(invalidUser));
 		assertEquals("Email already exists!!!", result.getMessage());
 	}

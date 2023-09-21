@@ -1,21 +1,33 @@
 package com.fssa.needstobedone.model;
 
-import java.time.LocalDate;
-
 /**
  * The User class represents user-related data.
  */
 public class User {
 
 	private String email;
+	public boolean isOwner() {
+		return isOwner;
+	}
+
+	public void setOwner(boolean isOwner) {
+		this.isOwner = isOwner;
+	}
+
+	public int getUserId() {
+		return userId;
+	}
+
+	public void setUserId(int userId) {
+		this.userId = userId;
+	}
+
+
+
 	private String password;
 	private String firstName;
 	private String lastName;
 	private boolean isOwner;
-	private LocalDate dateOfBirth;
-	private long phoneNumber;
-	private long aadhar;
-	private String address;
 	private int userId;
 
 	/**
@@ -26,40 +38,13 @@ public class User {
 	 * @param firstName   The user's first name.
 	 * @param lastName    The user's last name.
 	 * @param isOwner     A boolean indicating whether the user is an owner.
-	 * @param phoneNumber The user's phone number.
-	 * @param dateOfBirth The user's date of birth.
-	 * @param aadhar      The user's Aadhar number.
-	 * @param address     The user's address.
 	 */
-	public User(String email, String password, String firstName, String lastName, boolean isOwner, long phoneNumber,
-			LocalDate dateOfBirth, long aadhar, String address) {
+	public User(String email, String password, String firstName, String lastName, boolean isOwner) {
 		this.email = email;
 		this.password = password;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.isOwner = isOwner;
-		this.dateOfBirth = dateOfBirth;
-		this.phoneNumber = phoneNumber;
-		this.aadhar = aadhar;
-		this.address = address;
-	}
-
-	/**
-	 * Gets the user's date of birth.
-	 *
-	 * @return The user's date of birth.
-	 */
-	public LocalDate getDOB() {
-		return dateOfBirth;
-	}
-
-	/**
-	 * Sets the user's date of birth.
-	 *
-	 * @param dOB The user's date of birth to set.
-	 */
-	public void setDOB(LocalDate dOB) {
-		dateOfBirth = dOB;
 	}
 
 	/**
@@ -169,64 +154,12 @@ public class User {
 		return lastName;
 	}
 
-	/**
-	 * Gets the user's phone number.
-	 *
-	 * @return The user's phone number.
-	 */
-	public long getPhoneNumber() {
-		return phoneNumber;
-	}
-
-	/**
-	 * Sets the user's phone number.
-	 *
-	 * @param phoneNumber The phone number to set.
-	 */
-	public void setPhoneNumber(long phoneNumber) {
-		this.phoneNumber = phoneNumber;
-	}
-
-	/**
-	 * Gets the user's Aadhar number.
-	 *
-	 * @return The user's Aadhar number.
-	 */
-	public long getAadhar() {
-		return aadhar;
-	}
-
-	/**
-	 * Gets the user's address.
-	 *
-	 * @return The user's address.
-	 */
-	public String getAddress() {
-		return address;
-	}
-
-	/**
-	 * Sets the user's address.
-	 *
-	 * @param address The address to set.
-	 */
-	public void setAddress(String address) {
-		this.address = address;
-	}
-
-	/**
-	 * Sets the user's Aadhar number.
-	 *
-	 * @param aadhar The Aadhar number to set.
-	 */
-	public void setAadhar(long aadhar) {
-		this.aadhar = aadhar;
-	}
+	
 
 	@Override
 	public String toString() {
 		return "User [email=" + email + ", password=" + password + ", firstName=" + firstName + ", lastName=" + lastName
-				+ ", isOwner=" + isOwner + ", DOB=" + dateOfBirth + ", phoneNumber=" + phoneNumber + ", aadhar="
-				+ aadhar + ", address=" + address + ", userId=" + userId + "]";
+				+ ", isOwner=" + isOwner + ", DOB=" + ", userId=" + userId + "]";
 	}
+
 }

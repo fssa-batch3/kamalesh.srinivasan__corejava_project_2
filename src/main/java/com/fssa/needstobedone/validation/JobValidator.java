@@ -1,67 +1,89 @@
 package com.fssa.needstobedone.validation;
 
 import java.util.regex.Pattern;
-
 import com.fssa.needstobedone.exception.ValidationException;
 import com.fssa.needstobedone.model.Job;
 
-/**
- * Utility class for validating job-related data.
- */
 public class JobValidator {
 
-	/** 
-	 * Validates a job object.
-	 *
-	 * @param job The job to be validated.
-	 * @throws ValidationException If validation fails.
-	 */
-	public void validateJob(Job job) throws ValidationException {
-		if (job != null && validateTitle(job.getTitle())) {
-			validatePrice(job.getPrice()); 
-		}
-	}
+    public void validateJob(Job job) throws ValidationException {
+        if (job != null) {
+            validateTitle(job.getTitle());
+            validateLocation(job.getLocation());
+            validatePrice(job.getPrice());
+            validateDescription(job.getDescription());
+            validateSummary(job.getSummary());
+            validateQualification(job.getQualification());
+            validateResponsibilities(job.getResponsibilities());
+            validateUserId(Integer.toString(job.getUserId()));
+        }
+    }
 
-	/**
-	 * Validates a job title.
-	 *
-	 * @param title The job title to be validated.
-	 * @return true if the title is valid, false otherwise.
-	 * @throws ValidationException If validation fails.
-	 */
-	public static boolean validateTitle(String title) throws ValidationException {
-		boolean match = false;
+    public static boolean validateTitle(String title) throws ValidationException {
+        if (title == null || title.isEmpty()) {
+            throw new ValidationException("Job title is not valid - title cannot be empty");
+        }
+        if (!Pattern.matches("^[A-Za-z ]{1,30}$", title)) {
+            throw new ValidationException("Job title is not valid - should contain alphabets and be up to 30 characters long");
+        }
+        return true;
+    }
 
-		if (title == null) {
-			throw new ValidationException("Job title is not valid - job title cannot be empty");
-		}
+    public static boolean validateLocation(String location) throws ValidationException {
+        if (location == null || location.isEmpty()) {
+            throw new ValidationException("Job location is not valid - location cannot be empty");
+        }
+        if (!Pattern.matches("^[A-Za-z]{1,30}$", location)) {
+            throw new ValidationException("Job location is not valid - should contain alphabets and be up to 30 characters long");
+        }
+        return true;
+    }
 
-		String regex = "^[A-Za-z ]+$";
-		match = Pattern.compile(regex).matcher(title).matches();
+    public static boolean validateDescription(String description) throws ValidationException {
+        if (description == null || description.isEmpty()) {
+            throw new ValidationException("Job description is not valid - description cannot be empty");
+        }
+        if (description.length() > 200) {
+            throw new ValidationException("Job description is not valid - should be up to 200 characters long");
+        }
+        return true;
+    }
 
-		if (!match) {
-			throw new ValidationException(
-					"Job title is not valid - Please enter a string containing only alphabetic characters (both uppercase and lowercase) and spaces.");
-		}
+    public static boolean validateSummary(String summary) throws ValidationException {
+        // Default validation: Summary can't be empty, but no specific format constraints provided
+        if (summary == null || summary.isEmpty()) {
+            throw new ValidationException("Job summary is not valid - summary cannot be empty");
+        }
+        return true;
+    }
 
-		return true;
-	}
+    public static boolean validateQualification(String qualification) throws ValidationException {
+        // Default validation: Qualification can't be empty, but no specific format constraints provided
+        if (qualification == null || qualification.isEmpty()) {
+            throw new ValidationException("Job qualification is not valid - qualification cannot be empty");
+        }
+        return true;
+    }
 
-	/**
-	 * Validates a job price.
-	 *
-	 * @param price The job price to be validated.
-	 * @return true if the price is valid, false otherwise.
-	 * @throws ValidationException If validation fails.
-	 */
-	public static boolean validatePrice(int price) throws ValidationException {
-		if (price == 0) {
-			throw new ValidationException("Job Price is not valid - job price cannot be 0");
-		}
-		if (price < 0) {
-			throw new ValidationException("Job Price is not valid - Price should be a positive number");
-		}
+    public static boolean validateResponsibilities(String responsibilities) throws ValidationException {
+        // Default validation: Responsibilities can't be empty, but no specific format constraints provided
+        if (responsibilities == null || responsibilities.isEmpty()) {
+            throw new ValidationException("Job responsibilities are not valid - responsibilities cannot be empty");
+        }
+        return true;
+    }
 
-		return true;
-	}
+    public static boolean validatePrice(int price) throws ValidationException {
+        if (price <= 0) {
+            throw new ValidationException("Job Price is not valid - Price should be a positive number");
+        }
+        return true;
+    }
+
+    public static boolean validateUserId(String userId) throws ValidationException {
+        if (userId == null || userId.isEmpty()) {
+            throw new ValidationException("User ID is not valid - User ID cannot be empty");
+        }
+        return true;
+    }
 }

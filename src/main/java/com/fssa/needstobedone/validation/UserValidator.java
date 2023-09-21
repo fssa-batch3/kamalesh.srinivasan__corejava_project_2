@@ -1,7 +1,4 @@
 package com.fssa.needstobedone.validation;
-
-import java.time.LocalDate;
-import java.time.Period;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -23,10 +20,8 @@ public class UserValidator {
 	 */
 	public void validateUser(User user) throws ValidationException {
 		if (user != null && validatePassword(user.getPassword()) && validateEmail(user.getEmail())
-				&& validateName(user.getFirstName()) && validateName(user.getLastName())
-				&& validateAadhar(user.getAadhar()) && validateDOB(user.getDOB())
-				&& validatePhoneNumber(user.getPhoneNumber())) {
-			validateAddress(user.getAddress());
+				&& validateName(user.getFirstName())) {
+			validateName(user.getLastName());
 		}
 	}
 
@@ -62,13 +57,13 @@ public class UserValidator {
 	 * @return true if the address is valid, false otherwise.
 	 * @throws ValidationException If validation fails.
 	 */
-	public boolean validateAddress(String address) throws ValidationException {
-		if (address == null || address.trim().isEmpty()) {
-			throw new ValidationException("Address is not valid - Address cannot be empty");
-		}
-
-		return true;
-	}
+//	public boolean validateAddress(String address) throws ValidationException {
+//		if (address == null || address.trim().isEmpty()) {
+//			throw new ValidationException("Address is not valid - Address cannot be empty");
+//		}
+//
+//		return true;
+//	}
 
 	/**
 	 * Validates a user's password.
@@ -128,19 +123,19 @@ public class UserValidator {
 	 * @return true if the DOB is valid, false otherwise.
 	 * @throws ValidationException If validation fails.
 	 */
-	public boolean validateDOB(LocalDate date) throws ValidationException {
-
-		if (date == null)
-			throw new ValidationException("DateOfBirth is not valid - DateOfBirth cannot be empty");
-
-		LocalDate currentDate = LocalDate.now();
-		LocalDate minimumValidDob = currentDate.minus(Period.ofYears(15));
-		if (date.isAfter(minimumValidDob)) {
-			throw new ValidationException("DateOfBirth is not valid - your age should be greater than 15");
-		} else {
-			return true;
-		}
-	}
+//	public boolean validateDOB(LocalDate date) throws ValidationException {
+//
+//		if (date == null)
+//			throw new ValidationException("DateOfBirth is not valid - DateOfBirth cannot be empty");
+//
+//		LocalDate currentDate = LocalDate.now();
+//		LocalDate minimumValidDob = currentDate.minus(Period.ofYears(15));
+//		if (date.isAfter(minimumValidDob)) {
+//			throw new ValidationException("DateOfBirth is not valid - your age should be greater than 15");
+//		} else {
+//			return true;
+//		}
+//	}
 
 	/**
 	 * Validates a user's Aadhar number.
@@ -149,19 +144,19 @@ public class UserValidator {
 	 * @return true if the Aadhar number is valid, false otherwise.
 	 * @throws ValidationException If validation fails.
 	 */
-	public boolean validateAadhar(long aadhar) throws ValidationException {
-		boolean isMatch = false;
-
-		String aadharNumber = String.valueOf(aadhar);
-		if (aadharNumber == null)
-			throw new ValidationException("Aadhar number is not valid - Aadhar number cannot be empty");
-		String regex = "^\\d{12}$";
-		isMatch = Pattern.matches(regex, aadharNumber);
-		if (!isMatch) {
-			throw new ValidationException("Aadhaar number is not valid - Aadhaar number should be a 12-digit number.");
-		}
-		return isMatch;
-	}
+//	public boolean validateAadhar(long aadhar) throws ValidationException {
+//		boolean isMatch = false;
+//
+//		String aadharNumber = String.valueOf(aadhar);
+//		if (aadharNumber == null)
+//			throw new ValidationException("Aadhar number is not valid - Aadhar number cannot be empty");
+//		String regex = "^\\d{12}$";
+//		isMatch = Pattern.matches(regex, aadharNumber);
+//		if (!isMatch) {
+//			throw new ValidationException("Aadhaar number is not valid - Aadhaar number should be a 12-digit number.");
+//		}
+//		return isMatch;
+//	}
 
 	/**
 	 * Validates a user's phone number.
@@ -170,18 +165,18 @@ public class UserValidator {
 	 * @return true if the phone number is valid, false otherwise.
 	 * @throws ValidationException If validation fails.
 	 */
-	public boolean validatePhoneNumber(long phoneNumber) throws ValidationException {
-		boolean isMatch = false;
-
-		String phoneNumberStr = String.valueOf(phoneNumber);
-
-		if (phoneNumberStr == null)
-			throw new ValidationException("Phone number is not valid - Phone number cannot be empty");
-		String regex = "^\\d{10}$";
-		isMatch = Pattern.matches(regex, phoneNumberStr);
-		if (!isMatch) {
-			throw new ValidationException("Phone number is not valid - Phone number should be a 10-digit number.");
-		}
-		return isMatch;
-	}
+//	public boolean validatePhoneNumber(long phoneNumber) throws ValidationException {
+//		boolean isMatch = false;
+//
+//		String phoneNumberStr = String.valueOf(phoneNumber);
+//
+//		if (phoneNumberStr == null)
+//			throw new ValidationException("Phone number is not valid - Phone number cannot be empty");
+//		String regex = "^\\d{10}$";
+//		isMatch = Pattern.matches(regex, phoneNumberStr);
+//		if (!isMatch) {
+//			throw new ValidationException("Phone number is not valid - Phone number should be a 10-digit number.");
+//		}
+//		return isMatch;
+//	}
 }

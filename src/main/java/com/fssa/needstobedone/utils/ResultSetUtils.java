@@ -29,9 +29,7 @@ public class ResultSetUtils {
 		user.setFirstName(rs.getString("firstname"));
 		user.setLastName(rs.getString("lastname"));
 		user.setisOwner(rs.getBoolean("isOwner"));
-		user.setPhoneNumber(rs.getLong("phone_number"));
-		user.setDOB(rs.getDate("dob").toLocalDate());
-		user.setAddress(rs.getString("address"));
+		user.setUserId(rs.getInt("user_id"));
 		return user;
 	}
 }

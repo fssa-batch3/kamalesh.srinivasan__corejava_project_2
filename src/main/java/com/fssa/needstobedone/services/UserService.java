@@ -52,9 +52,9 @@ public class UserService {
 			if (!PasswordUtil.checkPassword(user.getPassword(), gettedUser.getPassword())) {
 				throw new ServiceException("Login Failed - password mismatch");
 			}
+			return gettedUser;
 		} catch (DAOException e) {
 			throw new ServiceException(e.getMessage());
 		}
-		return user;
 	}
 }

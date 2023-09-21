@@ -1,7 +1,6 @@
 package com.fssa.needstobedone.dao;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -32,27 +31,20 @@ public class UserDAO {
 	 * @throws DAOException If there was an error during the database operation.
 	 */
 	public boolean createUser(User user) throws DAOException {
-		String query = "INSERT INTO users (email, password, firstname, lastname, isOwner, phone_number, dob, address, aadhar) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+		String query = "INSERT INTO users (email, password, firstname, lastname, isOwner) VALUES (?, ?, ?, ?, ?)";
 		try (Connection connection = ConnectionUtil.getConnection();
 				PreparedStatement pst = connection.prepareStatement(query)) {
-
 			pst.setString(1, user.getEmail());
 			pst.setString(2, user.getPassword());
 			pst.setString(3, user.getFirstName());
 			pst.setString(4, user.getLastName());
 			pst.setBoolean(5, user.getisOwner());
-			pst.setLong(6, user.getPhoneNumber());
-			pst.setDate(7, Date.valueOf(user.getDOB()));
-			pst.setString(8, user.getAddress());
-			pst.setLong(9, user.getAadhar());
 			int rowsAffected = pst.executeUpdate();
 			return rowsAffected > 0;
-
 		} catch (SQLException e) {
 			throw new DAOException(e);
 		}
 	}
-
 	/**
 	 * Retrieves a user by their email from the database.
 	 *
@@ -71,6 +63,7 @@ public class UserDAO {
 
 			try (ResultSet rs = pst.executeQuery()) {
 				if (rs.next()) {
+					System.out.println(rs.toString());
 					user = ResultSetUtils.buildUserFromResultSet(rs);
 				}
 			}

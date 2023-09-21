@@ -5,144 +5,194 @@ package com.fssa.needstobedone.model;
  */
 public class Job {
 
-	private String title;
-	private int price;
-	private String email;
-	private String jobid;
-	private Boolean isDeleted;
+    private String title;
+    private String location;
+    private int price;
+    private String description;
+    private String summary;
+    private String qualification;
+    private String responsibilities;
+    private int userId;
+    private String jobid;
+    private Boolean isDeleted;
+    private String status;
+
+    /**
+     * Default constructor for the Job class.
+     */
+    public Job() {
+        // Default Constructor
+    }
 
 	/**
-	 * Default constructor for the Job class.
-	 */
-	public Job() {
-		// Default Constructor
+     * Constructs a new Job with the specified title, location, price, description, summary,
+     * qualification, responsibilities, and email.
+     *
+     * @param title           The title of the job.
+     * @param location        The location of the job.
+     * @param price           The price of the job.
+     * @param description     The description of the job.
+     * @param summary         The summary of the job.
+     * @param qualification   The qualifications required for the job.
+     * @param responsibilities The responsibilities of the job.
+     * @param email           The email associated with the job.
+     */
+    public Job(String title, String location, int price, String description, String summary, String qualification,
+               String responsibilities, int userId) {
+        this.title = title;
+        this.location = location;
+        this.price = price;
+        this.description = description;
+        this.summary = summary;
+        this.qualification = qualification;
+        this.responsibilities = responsibilities;
+        this.userId = userId;
+    }
+
+
+    public String getStatus() {
+		return status;
 	}
 
-	/**
-	 * Constructs a new Job with the specified title, price, and email.
-	 *
-	 * @param title The title of the job.
-	 * @param price The price of the job.
-	 * @param email The email associated with the job.
-	 */
-	public Job(String title, int price, String email) {
-		this.title = title;
-		this.price = price;
-		this.email = email;
+	public void setStatus(String status) {
+		this.status = status;
 	}
 
-	/**
-	 * Constructs a new Job with the specified price, job ID, and title.
-	 *
-	 * @param price The price of the job.
-	 * @param jobid The unique job ID.
-	 * @param title The title of the job.
-	 */
-	public Job(int price, String jobid, String title) {
-		this.title = title;
-		this.price = price;
-		this.jobid = jobid;
-	}
+    /**
+     * Gets the job location.
+     *
+     * @return The job location.
+     */
+    public String getLocation() {
+        return location;
+    }
 
-	/**
-	 * Gets the value of the "isDeleted" flag, indicating whether the job is
-	 * deleted.
-	 *
-	 * @return true if the job is deleted, false otherwise.
-	 */
-	public Boolean getIsDeleted() {
-		return isDeleted;
-	}
+    /**
+     * Sets the job location.
+     *
+     * @param location The job location to set.
+     */
+    public void setLocation(String location) {
+        this.location = location;
+    }
 
-	/**
-	 * Sets the "isDeleted" flag to indicate whether the job is deleted.
-	 *
-	 * @param isDeleted true if the job is deleted, false otherwise.
-	 */
-	public void setIsDeleted(Boolean isDeleted) {
-		this.isDeleted = isDeleted;
-	}
+    /**
+     * Gets the job description.
+     *
+     * @return The job description.
+     */
+    public String getDescription() {
+        return description;
+    }
 
-	/**
-	 * Gets the job ID.
-	 *
-	 * @return The job ID.
-	 */
-	public String getJobid() {
-		return jobid;
-	}
+    /**
+     * Sets the job description.
+     *
+     * @param description The job description to set.
+     */
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
-	/**
-	 * Sets the job ID.
-	 *
-	 * @param jobid The job ID to set.
-	 */
-	public void setJobid(String jobid) {
-		this.jobid = jobid;
-	}
+    /**
+     * Gets the job summary.
+     *
+     * @return The job summary.
+     */
+    public String getSummary() {
+        return summary;
+    }
 
-	/**
-	 * Gets the job title.
-	 *
-	 * @return The job title.
-	 */
-	public String getTitle() {
-		return title;
-	}
+    /**
+     * Sets the job summary.
+     *
+     * @param summary The job summary to set.
+     */
+    public void setSummary(String summary) {
+        this.summary = summary;
+    }
 
-	/**
-	 * Sets the job title.
-	 *
-	 * @param title The job title to set.
-	 */
-	public void setTitle(String title) {
-		this.title = title;
-	}
+    /**
+     * Gets the job qualification.
+     *
+     * @return The job qualification.
+     */
+    public String getQualification() {
+        return qualification;
+    }
 
-	/**
-	 * Gets the job price.
-	 *
-	 * @return The job price.
-	 */
-	public int getPrice() {
-		return price;
-	}
+    /**
+     * Sets the job qualification.
+     *
+     * @param qualification The job qualification to set.
+     */
+    public void setQualification(String qualification) {
+        this.qualification = qualification;
+    }
 
-	/**
-	 * Sets the job price.
-	 *
-	 * @param price The job price to set.
-	 */
-	public void setPrice(int price) {
-		this.price = price;
-	}
+    /**
+     * Gets the job responsibilities.
+     *
+     * @return The job responsibilities.
+     */
+    public String getResponsibilities() {
+        return responsibilities;
+    }
 
-	/**
-	 * Gets the email associated with the job.
-	 *
-	 * @return The email associated with the job.
-	 */
-	public String getEmail() {
-		return email;
-	}
+    /**
+     * Sets the job responsibilities.
+     *
+     * @param responsibilities The job responsibilities to set.
+     */
+    public void setResponsibilities(String responsibilities) {
+        this.responsibilities = responsibilities;
+    }
+    
+    public String getTitle() {
+    	return title;
+    }
+    
+    public void setTitle(String title) {
+    	this.title = title;
+    }
+    
+    public int getPrice() {
+    	return price;
+    }
+    
+    public void setPrice(int price) {
+    	this.price = price;
+    }
+    
+    public int getUserId() {
+    	return userId;
+    }
+    
+    public void setUserId(int userId) {
+    	this.userId = userId;
+    }
+    
+    public String getJobid() {
+    	return jobid;
+    }
+    
+    public void setJobid(String jobid) {
+    	this.jobid = jobid;
+    }
+    
+    public Boolean getIsDeleted() {
+    	return isDeleted;
+    }
+    
+    public void setIsDeleted(Boolean isDeleted) {
+    	this.isDeleted = isDeleted;
+    }
 
-	/**
-	 * Sets the email associated with the job.
-	 *
-	 * @param email The email to set.
-	 */
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	/**
-	 * Generates a string representation of the Job object.
-	 *
-	 * @return A string representation of the Job object.
-	 */
-	@Override
+    @Override
 	public String toString() {
-		return "Job [title=" + title + ", price=" + price + ", email=" + email + ", jobid=" + jobid + ", isDeleted="
-				+ isDeleted + "]";
+		return "Job [title=" + title + ", location=" + location + ", price=" + price + ", description=" + description
+				+ ", summary=" + summary + ", qualification=" + qualification + ", responsibilities=" + responsibilities
+				+ ", userId=" + userId + ", jobid=" + jobid + ", isDeleted=" + isDeleted + ", status=" + status + "]";
 	}
+
 }
