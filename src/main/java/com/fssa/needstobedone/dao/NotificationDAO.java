@@ -36,7 +36,7 @@ public class NotificationDAO {
 		List<AllModal> notifications = new ArrayList<>();
 
 		String sql = "SELECT n.notification_id, n.applier_id, n.job_id, n.status, "
-				+ "j.title, j.description, j.location, u.firstname, u.lastname " + "FROM notification n "
+				+ "j.title, j.description, j.location, u.firstname, u.lastname,u.email " + "FROM notification n "
 				+ "INNER JOIN job j ON n.job_id = j.jobid " + "INNER JOIN users u ON j.user_id = u.user_id "
 				+ "WHERE n.applier_id = ?";
 
@@ -63,6 +63,7 @@ public class NotificationDAO {
 					User user = new User();
 					user.setFirstName(resultSet.getString("firstname"));
 					user.setLastName(resultSet.getString("lastname"));
+					user.setEmail(resultSet.getString("email"));
 
 					// Set the job and user for the notification
 					AllModal allModal = new AllModal();
@@ -98,11 +99,12 @@ public class NotificationDAO {
 	
 	public List<AllModal> getNotificationsByUserId(int userId) throws DAOException {
 		List<AllModal> notifications = new ArrayList<>();
+		System.out.println(userId);
 
 		String sql = "SELECT n.notification_id, n.applier_id, n.job_id, n.status, "
-				+ "j.title, j.description, j.location, u.firstname, u.lastname " + "FROM notification n "
-				+ "INNER JOIN job j ON n.job_id = j.jobid " + "INNER JOIN users u ON j.user_id = u.user_id "
-				+ "WHERE u.user_id = ?";
+				+ "j.title, j.description, j.location, u.firstname, u.lastname,u.email " + "FROM notification n "
+				+ "INNER JOIN job j ON n.job_id = j.jobid " + "INNER JOIN users u ON n.applier_id = u.user_id "
+				+ "WHERE j.user_id = ?";
 
 		try (Connection connection = ConnectionUtil.getConnection();
 				PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
@@ -127,6 +129,7 @@ public class NotificationDAO {
 					User user = new User();
 					user.setFirstName(resultSet.getString("firstname"));
 					user.setLastName(resultSet.getString("lastname"));
+					user.setEmail(resultSet.getString("email"));
 
 					// Set the job and user for the notification
 					AllModal allModal = new AllModal();

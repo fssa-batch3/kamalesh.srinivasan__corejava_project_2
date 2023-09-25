@@ -9,7 +9,10 @@ import java.util.List;
 import java.util.UUID;
 
 import com.fssa.needstobedone.exception.DAOException;
+import com.fssa.needstobedone.model.AllModal;
 import com.fssa.needstobedone.model.Job;
+import com.fssa.needstobedone.model.Notification;
+import com.fssa.needstobedone.model.User;
 import com.fssa.needstobedone.utils.ConnectionUtil;
 
 public class JobDAO {
@@ -185,6 +188,34 @@ public class JobDAO {
 				job.setUserId(resultSet.getInt("user_id"));
 				job.setStatus(resultSet.getString("status"));
 				arr.add(job);
+			}
+			resultSet.close();
+			return arr;
+		} catch (SQLException | IndexOutOfBoundsException e) {
+			e.printStackTrace();
+			throw new DAOException("Job Not Found");
+		}
+	}
+	
+	public List<AllModal> jobApplierList(String id) throws DAOException{
+		List<AllModal> arr = new ArrayList<>();
+		String selectQuery = "Select n.applier_id,n.status,n.job_id,u.user_id,u.firstName,u.lastName,u.email from notification n inner join users u on n.applier_id = u.user_id where n.job_id = ? ";
+		try (Connection connection = ConnectionUtil.getConnection();
+				PreparedStatement statement = connection.prepareStatement(selectQuery)) {
+			statement.setString(1, id);
+			ResultSet resultSet = statement.executeQuery();
+			while (resultSet.next()) {
+				AllModal jobList = new AllModal();
+				Notification notification = new Notification();
+				notification.setApplierId(resultSet.getInt("applier_id"));
+				notification.setStatus(resultSet.getString("status"));
+				User user = new User();
+				user.setEmail(resultSet.getString("email"));
+				user.setFirstName(resultSet.getString("firstName"));
+				user.setLastName(resultSet.getString("lastName"));
+				jobList.setNotification(notification);
+				jobList.setUser(user);
+				arr.add(jobList);
 			}
 			resultSet.close();
 			return arr;

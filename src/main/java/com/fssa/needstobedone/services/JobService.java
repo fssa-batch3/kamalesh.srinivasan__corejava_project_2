@@ -6,6 +6,7 @@ import com.fssa.needstobedone.dao.JobDAO;
 import com.fssa.needstobedone.exception.DAOException;
 import com.fssa.needstobedone.exception.ServiceException;
 import com.fssa.needstobedone.exception.ValidationException;
+import com.fssa.needstobedone.model.AllModal;
 import com.fssa.needstobedone.model.Job;
 import com.fssa.needstobedone.validation.JobValidator;
 
@@ -125,6 +126,21 @@ public class JobService {
 				return result;
 			} else {
 				throw new DAOException("No Jobs Found");
+			}
+		} catch (DAOException e) {
+			throw new ServiceException(e.getMessage());
+		}
+	}
+	
+	
+	public List<AllModal> jobStatusList(String id) throws ServiceException {
+		JobDAO jobDAO = new JobDAO();
+		try {
+			List<AllModal> result = (List<AllModal>) jobDAO.jobApplierList(id);
+			if (result != null && !result.isEmpty()) {
+				return result;
+			} else {
+				throw new DAOException("NO application for this job");
 			}
 		} catch (DAOException e) {
 			throw new ServiceException(e.getMessage());
