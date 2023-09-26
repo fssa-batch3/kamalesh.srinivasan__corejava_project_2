@@ -78,7 +78,6 @@ public class NotificationDAO {
 			throw new DAOException("Error in getting notifications by applier ID: " + e.getMessage());
 		}
 
-		System.out.println(notifications);
 		return notifications;
 	}
 
@@ -99,7 +98,6 @@ public class NotificationDAO {
 	
 	public List<AllModal> getNotificationsByUserId(int userId) throws DAOException {
 		List<AllModal> notifications = new ArrayList<>();
-		System.out.println(userId);
 
 		String sql = "SELECT n.notification_id, n.applier_id, n.job_id, n.status, "
 				+ "j.title, j.description, j.location, u.firstname, u.lastname,u.email " + "FROM notification n "
@@ -144,8 +142,7 @@ public class NotificationDAO {
 			throw new DAOException("Error in getting notifications by user ID: " + e.getMessage());
 		}
 
-		System.out.println(notifications);
-		return notifications;
+ 		return notifications;
 	}
 	
 	
@@ -169,8 +166,7 @@ public class NotificationDAO {
 			throw new DAOException("Error in getting notifications by notification id ID: " + e.getMessage());
 		}
 
-		System.out.println(notifications);
-		return notifications;
+ 		return notifications;
 	}
 
 }

@@ -63,8 +63,7 @@ public class UserDAO {
 
 			try (ResultSet rs = pst.executeQuery()) {
 				if (rs.next()) {
-					System.out.println(rs.toString());
-					user = ResultSetUtils.buildUserFromResultSet(rs);
+ 					user = ResultSetUtils.buildUserFromResultSet(rs);
 				}
 			}
 

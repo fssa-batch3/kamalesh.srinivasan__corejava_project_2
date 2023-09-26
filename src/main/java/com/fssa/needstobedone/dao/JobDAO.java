@@ -56,7 +56,6 @@ public class JobDAO {
 			statement.setString(7, job.getResponsibilities());
 			statement.setString(9, job.getJobid());
 			statement.setString(8, job.getStatus());
-			System.out.println(job.getStatus());
 			int rows = statement.executeUpdate();
 			return (rows > 0);
 		} catch (SQLException e) {
@@ -73,11 +72,9 @@ public class JobDAO {
 
 			ResultSet resultSet = statement.executeQuery();
 			while (resultSet.next()) {
-				System.out.println(resultSet.getString("jobid"));
 				Job job = new Job();
 				job.setJobid(resultSet.getString("jobid"));
 				job.setTitle(resultSet.getString("title"));
-				System.out.println(resultSet.getString("title"));
 				job.setPrice(resultSet.getInt("price"));
 				job.setLocation(resultSet.getString("location"));
 				job.setDescription(resultSet.getString("description"));
@@ -86,7 +83,6 @@ public class JobDAO {
 				job.setResponsibilities(resultSet.getString("responsibilities"));
 				job.setUserId(resultSet.getInt("user_id"));
 				   String status = resultSet.getString("status");
-				    System.out.println("Status: " + status);
 				job.setStatus(resultSet.getString("status"));
 				arr.add(job);
 			}
@@ -107,11 +103,9 @@ public class JobDAO {
 
 			ResultSet resultSet = statement.executeQuery();
 			while (resultSet.next()) {
-				System.out.println(resultSet.getString("jobid"));
 				Job job = new Job();
 				job.setJobid(resultSet.getString("jobid"));
 				job.setTitle(resultSet.getString("title"));
-				System.out.println(resultSet.getString("title"));
 				job.setPrice(resultSet.getInt("price"));
 				job.setLocation(resultSet.getString("location"));
 				job.setDescription(resultSet.getString("description"));
@@ -174,11 +168,9 @@ public class JobDAO {
 				PreparedStatement statement = connection.prepareStatement(selectQuery)) {
 			ResultSet resultSet = statement.executeQuery();
 			while (resultSet.next()) {
-				System.out.println(resultSet.getString("jobid"));
 				Job job = new Job();
 				job.setJobid(resultSet.getString("jobid"));
 				job.setTitle(resultSet.getString("title"));
-				System.out.println(resultSet.getString("title"));
 				job.setPrice(resultSet.getInt("price"));
 				job.setLocation(resultSet.getString("location"));
 				job.setDescription(resultSet.getString("description"));

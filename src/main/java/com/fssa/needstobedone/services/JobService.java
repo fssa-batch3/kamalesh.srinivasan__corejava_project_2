@@ -28,9 +28,6 @@ public class JobService {
 		JobDAO jobDAO = new JobDAO();
 		try {
 			jobValidator.validateJob(job);
-//			if (!jobDAO.checkJobId(Integer.toString(job.getUserId()))) {
-//				throw new DAOException("Email is not found");
-//			}
 			jobDAO.createJob(job);
 			return true;
 		} catch (DAOException | ValidationException e) {
@@ -49,8 +46,7 @@ public class JobService {
 		JobDAO jobDAO = new JobDAO();
 		try {
 			List<Job> result = jobDAO.listJobsByJobId(id);
-			System.out.println(result);
-			return result.get(0);
+ 			return result.get(0);
 		} catch (DAOException e) {
 			throw new ServiceException(e.getMessage());
 		}
