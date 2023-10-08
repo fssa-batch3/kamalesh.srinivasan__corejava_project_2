@@ -18,28 +18,50 @@ import com.fssa.needstobedone.utils.ConnectionUtil;
 public class JobDAO {
 
 	public boolean createJob(Job job) throws DAOException {
-		String insertQuery = "INSERT INTO job (jobid, title, location, price, description, summary, qualification, responsibilities, user_id) "
-				+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+	    String checkIfExistsQuery = "SELECT COUNT(*) FROM job WHERE title = ? AND location = ? AND price = ? AND description = ? AND summary = ? AND qualification = ? AND responsibilities = ?";
+	    String insertQuery = "INSERT INTO job (jobid, title, location, price, description, summary, qualification, responsibilities, user_id) "
+	            + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
-		try (Connection connection = ConnectionUtil.getConnection();
-				PreparedStatement statement = connection.prepareStatement(insertQuery)) {
+	    try (Connection connection = ConnectionUtil.getConnection();
+	         PreparedStatement checkIfExistsStatement = connection.prepareStatement(checkIfExistsQuery);
+	         PreparedStatement insertStatement = connection.prepareStatement(insertQuery)) {
 
-			String jobId = UUID.randomUUID().toString();
-			statement.setString(1, jobId);
-			statement.setString(2, job.getTitle());
-			statement.setString(3, job.getLocation());
-			statement.setInt(4, job.getPrice());
-			statement.setString(5, job.getDescription());
-			statement.setString(6, job.getSummary());
-			statement.setString(7, job.getQualification());
-			statement.setString(8, job.getResponsibilities());
-			statement.setInt(9, job.getUserId());
-			int rows = statement.executeUpdate();
-			return (rows > 0);
+	        // Set parameters for checking if the record already exists
+	        checkIfExistsStatement.setString(1, job.getTitle());
+	        checkIfExistsStatement.setString(2, job.getLocation());
+	        checkIfExistsStatement.setInt(3, job.getPrice());
+	        checkIfExistsStatement.setString(4, job.getDescription());
+	        checkIfExistsStatement.setString(5, job.getSummary());
+	        checkIfExistsStatement.setString(6, job.getQualification());
+	        checkIfExistsStatement.setString(7, job.getResponsibilities());
 
-		} catch (SQLException e) {
-			throw new DAOException(e);
-		}
+	        ResultSet resultSet = checkIfExistsStatement.executeQuery();
+	        resultSet.next();
+	        int count = resultSet.getInt(1);
+
+	        // If a record with the same data already exists, return false
+	        if (count > 0) {
+	            throw new SQLException("Duplicate record");
+	        }
+
+	        // Data doesn't exist, proceed with the insertion
+	        String jobId = UUID.randomUUID().toString();
+	        insertStatement.setString(1, jobId);
+	        insertStatement.setString(2, job.getTitle());
+	        insertStatement.setString(3, job.getLocation());
+	        insertStatement.setInt(4, job.getPrice());
+	        insertStatement.setString(5, job.getDescription());
+	        insertStatement.setString(6, job.getSummary());
+	        insertStatement.setString(7, job.getQualification());
+	        insertStatement.setString(8, job.getResponsibilities());
+	        insertStatement.setInt(9, job.getUserId());
+
+	        int rows = insertStatement.executeUpdate();
+	        return (rows > 0);
+
+	    } catch (SQLException e) {
+	        throw new DAOException(e);
+	    }
 	}
 
 	public boolean updateJob(Job job) throws DAOException {
