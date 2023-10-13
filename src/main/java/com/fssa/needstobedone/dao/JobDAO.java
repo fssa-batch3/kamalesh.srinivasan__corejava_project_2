@@ -106,6 +106,7 @@ public class JobDAO {
 				job.setUserId(resultSet.getInt("user_id"));
 				   String status = resultSet.getString("status");
 				job.setStatus(resultSet.getString("status"));
+				job.setCreatedDate(resultSet.getString("created_date"));
 				arr.add(job);
 			}
 			resultSet.close();
