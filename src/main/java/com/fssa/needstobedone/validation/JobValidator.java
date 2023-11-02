@@ -19,7 +19,7 @@ public class JobValidator {
         }
     }
 
-    public static boolean validateTitle(String title) throws ValidationException {
+    public boolean validateTitle(String title) throws ValidationException {
         if (title == null || title.isEmpty()) {
             throw new ValidationException("Job title is not valid - title cannot be empty");
         }
@@ -29,7 +29,7 @@ public class JobValidator {
         return true;
     }
 
-    public static boolean validateLocation(String location) throws ValidationException {
+    public boolean validateLocation(String location) throws ValidationException {
         if (location == null || location.isEmpty()) {
             throw new ValidationException("Job location is not valid - location cannot be empty");
         }
@@ -39,7 +39,7 @@ public class JobValidator {
         return true;
     }
 
-    public static boolean validateDescription(String description) throws ValidationException {
+    public boolean validateDescription(String description) throws ValidationException {
         if (description == null || description.isEmpty()) {
             throw new ValidationException("Job description is not valid - description cannot be empty");
         }
@@ -49,7 +49,7 @@ public class JobValidator {
         return true;
     }
 
-    public static boolean validateSummary(String summary) throws ValidationException {
+    public boolean validateSummary(String summary) throws ValidationException {
         // Default validation: Summary can't be empty, but no specific format constraints provided
         if (summary == null || summary.isEmpty()) {
             throw new ValidationException("Job summary is not valid - summary cannot be empty");
@@ -57,7 +57,7 @@ public class JobValidator {
         return true;
     }
 
-    public static boolean validateQualification(String qualification) throws ValidationException {
+    public boolean validateQualification(String qualification) throws ValidationException {
         // Default validation: Qualification can't be empty, but no specific format constraints provided
         if (qualification == null || qualification.isEmpty()) {
             throw new ValidationException("Job qualification is not valid - qualification cannot be empty");
@@ -65,7 +65,7 @@ public class JobValidator {
         return true;
     }
 
-    public static boolean validateResponsibilities(String responsibilities) throws ValidationException {
+    public boolean validateResponsibilities(String responsibilities) throws ValidationException {
         // Default validation: Responsibilities can't be empty, but no specific format constraints provided
         if (responsibilities == null || responsibilities.isEmpty()) {
             throw new ValidationException("Job responsibilities are not valid - responsibilities cannot be empty");
@@ -73,14 +73,14 @@ public class JobValidator {
         return true;
     }
 
-    public static boolean validatePrice(int price) throws ValidationException {
+    public boolean validatePrice(int price) throws ValidationException {
         if (price <= 0) {
             throw new ValidationException("Job Price is not valid - Price should be a positive number");
         }
         return true;
     }
 
-    public static boolean validateUserId(String userId) throws ValidationException {
+    public boolean validateUserId(String userId) throws ValidationException {
         if (userId == null || userId.isEmpty()) {
             throw new ValidationException("User ID is not valid - User ID cannot be empty");
         }

@@ -49,6 +49,20 @@ public class Job {
 		this.responsibilities = responsibilities;
 		this.userId = userId;
 	}
+	
+	public Job(String title, String location, String jobId,int price, String description, String summary, String qualification,
+			String responsibilities, int userId,String status) {
+		this.title = title;
+		this.location = location;
+		this.jobid = jobId;
+		this.description = description;
+		this.price = price;
+		this.summary = summary;
+		this.qualification = qualification;
+		this.responsibilities = responsibilities;
+		this.userId = userId;
+		this.status = status;
+	}
 
 	public String getCreatedDate() {
 		return createdDate;

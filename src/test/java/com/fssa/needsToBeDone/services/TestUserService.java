@@ -36,7 +36,7 @@ class TestUserService {
 			fail("ServiceException occurred: " + e.getMessage());
 		}
 	}
-
+ 
 	@Test
 	void testRegisterInvalidUser() {
 		LocalDate date = LocalDate.of(2003, 8, 6);
@@ -47,7 +47,7 @@ class TestUserService {
 
 	@Test
 	void testLogInValidUser() {
-		User validUser = new User("kishor@gmail.com", "Test@123");
+		User validUser = new User("kamalesh.srinivasanowner@fssa.freshworks.com", "Test@123");
 		try {
 			User loggedInUser = userService.logInUser(validUser);
 			System.out.println(loggedInUser);

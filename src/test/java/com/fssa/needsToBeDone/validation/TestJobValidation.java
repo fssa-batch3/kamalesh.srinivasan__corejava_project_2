@@ -30,7 +30,7 @@ class TestJobValidation {
 		ValidationException exception = assertThrows(ValidationException.class,
 				() -> jobValidator.validateTitle("123"));
 		assertEquals(
-				"Job title is not valid - Please enter a string containing only alphabetic characters (both uppercase and lowercase) and spaces.",
+				"Job title is not valid - should contain alphabets and be up to 30 characters long",
 				exception.getMessage());
 	}
 
@@ -47,9 +47,9 @@ class TestJobValidation {
 	@Test
 	void testValidatePriceWithZeroPrice() {
 		ValidationException exception = assertThrows(ValidationException.class, () -> jobValidator.validatePrice(0));
-		assertEquals("Job Price is not valid - job price cannot be 0", exception.getMessage());
+		assertEquals("Job Price is not valid - Price should be a positive number", exception.getMessage());
 	}
-
+ 
 	@Test
 	void testValidatePriceWithNegativePrice() {
 		ValidationException exception = assertThrows(ValidationException.class, () -> jobValidator.validatePrice(-50));
@@ -59,10 +59,10 @@ class TestJobValidation {
 	@Test
 	void testValidateJobWithValidJob() {
 		try {
-			Job validJob = new Job("FrontEnd Developer", 100, null);
+			Job validJob = new Job("FrontEnd Developer", "chennai", 10000, "develop a frontend for a project", "develop a frontend for a project", "develop a frontend for a project", "develop a frontend for a project", 5);
 			jobValidator.validateJob(validJob);
 			assertTrue(true);
-		} catch (ValidationException e) {
+			} catch (ValidationException e) {
 			fail("ValidationException occurred: " + e.getMessage());
 		}
 	}
@@ -70,32 +70,32 @@ class TestJobValidation {
 	@Test
 	void testValidateJobWithInvalidTitle() {
 		ValidationException exception = assertThrows(ValidationException.class, () -> {
-			jobValidator.validateJob(new Job("123", 100, null));
+			jobValidator.validateJob(new Job("123", "chennai", 10000, "develop a frontend for a project", "develop a frontend for a project", "develop a frontend for a project", "develop a frontend for a project", 5));
 		});
 		assertEquals(
-				"Job title is not valid - Please enter a string containing only alphabetic characters (both uppercase and lowercase) and spaces.",
+				"Job title is not valid - should contain alphabets and be up to 30 characters long",
 				exception.getMessage());
 	}
 
 	@Test
 	void testValidateJobWithNullTitle() {
 		ValidationException exception = assertThrows(ValidationException.class,
-				() -> jobValidator.validateJob(new Job(null, 100, null)));
-		assertEquals("Job title is not valid - job title cannot be empty", exception.getMessage());
+				() -> jobValidator.validateJob(new Job(null, "chennai", 10000, "develop a frontend for a project", "develop a frontend for a project", "develop a frontend for a project", "develop a frontend for a project", 5)));
+		assertEquals("Job title is not valid - title cannot be empty", exception.getMessage());
 	}
 
-	@Test
+	@Test 
 	void testValidateJobWithZeroPrice() {
 		ValidationException exception = assertThrows(ValidationException.class, () -> {
-			jobValidator.validateJob(new Job("FrontEnd Developer", 0, null));
+			jobValidator.validateJob(new Job("FrontEnd Developer", "chennai", 0, "develop a frontend for a project", "develop a frontend for a project", "develop a frontend for a project", "develop a frontend for a project", 5));
 		});
-		assertEquals("Job Price is not valid - job price cannot be 0", exception.getMessage());
+		assertEquals("Job Price is not valid - Price should be a positive number", exception.getMessage());
 	}
 
 	@Test
 	void testValidateJobWithNegativePrice() {
 		ValidationException exception = assertThrows(ValidationException.class, () -> {
-			jobValidator.validateJob(new Job("FrontEnd Developer", -50, null));
+			jobValidator.validateJob(new Job("FrontEnd Developer","chennai", -10000, "develop a frontend for a project", "develop a frontend for a project", "develop a frontend for a project", "develop a frontend for a project", 5));
 		});
 		assertEquals("Job Price is not valid - Price should be a positive number", exception.getMessage());
 	}

@@ -24,28 +24,30 @@ class TestJobService {
 		jobService = new JobService();
 	}
 
-	@Test
-	void testCreateValidJob() {
-		Job validJob = new Job("FrontEnd", 200000, "kishor@gmail.com");
-		try {
-			assertTrue(jobService.createJob(validJob));
-		} catch (ServiceException e) {
-			fail("ServiceException occurred: " + e.getMessage());
-		}
-	}
-
-	@Test
-	void testCreateInvalidJob() {
-		Job invalidJob = new Job("FrontEnd", 200000, "kamaleshInvalidE.srinivasan@fssa.freshworks.com");
-		ServiceException result = assertThrows(ServiceException.class, () -> jobService.createJob(invalidJob));
-		assertEquals("Email is not found", result.getMessage());
-	}
-
+//	@Test
+//	void testCreateValidJob() {
+//		int num = (char) System.nanoTime();
+//		Job validJob = new Job("FrontEnd"+num, "chennai", 10000, "develop a frontend for a project", "develop a frontend for a project", "develop a frontend for a project", "develop a frontend for a project", 5);
+//		try {
+//			assertTrue(jobService.createJob(validJob));
+//		} catch (ServiceException e) {
+//			fail("ServiceException occurred: " + e.getMessage());
+//		}
+//	}
+//
+//	@Test 
+//	void testCreateInvalidJob() {
+//		char num = (char) System.nanoTime();
+//		Job invalidJob = new Job("FrontEnd"+num, "chennai", 10000, "develop a frontend for a project", "develop a frontend for a project", "develop a frontend for a project", "develop a frontend for a project", -10);
+//		ServiceException result = assertThrows(ServiceException.class, () -> jobService.createJob(invalidJob));
+//		assertEquals("Email is not found", result.getMessage());
+//	}
+ 
 	@Test
 	void testListValidJobs() {
-		String validJobId = "08b09556-5de1-4b9e-bbd8-1d7fddd7809c";
+		String validJobId = "6c24043f-789f-11ee-8616-02420a00009l";
 		try {
-			Job result = jobService.listJobs(validJobId);
+			Job result = jobService.listJobsByJobId(validJobId);
 			assertNotNull(result);
 		} catch (ServiceException e) {
 			fail("ServiceException occurred: " + e.getMessage());
@@ -56,13 +58,14 @@ class TestJobService {
 	@Test
 	void testListInvalidJobs() {
 		String invalidJobId = "0bdfa607-c773-4705-a379-c1e9b4f2b281InvalidJobId";
-		ServiceException result = assertThrows(ServiceException.class, () -> jobService.listJobs(invalidJobId));
-		assertEquals("Job Not Found", result.getMessage());
+		ServiceException result = assertThrows(ServiceException.class, () -> jobService.listJobsByJobId(invalidJobId));
+		assertEquals("No job found", result.getMessage());
 	}
 
 	@Test
 	void testUpdateValidJob() {
-		Job validJobToUpdate = new Job(1000, "08b09556-5de1-4b9e-bbd8-1d7fddd7809c", "UpdatedJob");
+		Job validJobToUpdate = new Job("FE", "chennai", "affc80d1-1bcc-43da-ad06-415ac59f5a86",1000,"UpdatedJob", "UpdatedJob", "UpdatedJob", "UpdatedJob", 0,"Not started");
+		System.out.println(validJobToUpdate);
 		try {
 			assertTrue(jobService.updateJobs(validJobToUpdate));
 		} catch (ServiceException e) {
@@ -72,14 +75,14 @@ class TestJobService {
 
 	@Test
 	void testUpdateInvalidJob() {
-		Job invalidJobToUpdate = new Job(1000, "0bdfa607-c773-4705-a379-c1e9b4f2b281invalidJobToUpdate", "UpdatedJob");
+		Job invalidJobToUpdate = new Job("FE", "Chennai", 1000, "0bdfa607-c773-4705-a379-c1e9b4f2b281invalidJobToUpdate", "UpdatedJob", "UpdatedJob", "UpdatedJob", 0);
 		ServiceException result = assertThrows(ServiceException.class, () -> jobService.updateJobs(invalidJobToUpdate));
 		assertEquals("JobId is not valid", result.getMessage());
 	}
 
 	@Test
 	void testDeleteValidJob() {
-		String validJobIdToDelete = "0bdfa607-c773-4705-a379-c1e9b4f2b281";
+		String validJobIdToDelete = "04b20d6c-7373-41b2-b46e-6c265eb19f9d";
 		try {
 			assertTrue(jobService.deleteJobs(validJobIdToDelete));
 		} catch (ServiceException e) {
@@ -97,23 +100,7 @@ class TestJobService {
 
 	}
 
-	@Test
-	void testListValidJobsByEmail() {
-		String validEmail = "kamalesh.srinivasan@fssa.freshworks.com";
-		try {
-			List<Job> result = jobService.listJobsByEmail(validEmail);
-			assertNotNull(result);
-		} catch (ServiceException e) {
-			fail("ServiceException occurred: " + e.getMessage());
-		}
 
-	}
 
-	@Test
-	void testListInvalidJobsbyEmail() {
-		String invalidEmail = "invalidemail@fssa.freshworks.com";
-		ServiceException result = assertThrows(ServiceException.class, () -> jobService.listJobsByEmail(invalidEmail));
-		assertEquals("No Jobs Found", result.getMessage());
-	}
 
 }

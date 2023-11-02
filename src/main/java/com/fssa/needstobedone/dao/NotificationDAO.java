@@ -27,8 +27,7 @@ public class NotificationDAO {
 			int rows = statement.executeUpdate();
 			return (rows > 0);
 		} catch (SQLException e) {
-			e.printStackTrace();
-			throw new DAOException("Notification Not Created becausae of " + e.getMessage());
+			throw new DAOException(e);
 		}
 	}
 
@@ -75,7 +74,7 @@ public class NotificationDAO {
 				}
 			}
 		} catch (SQLException e) {
-			throw new DAOException("Error in getting notifications by applier ID: " + e.getMessage());
+			throw new DAOException(e);
 		}
 
 		return notifications;
@@ -91,7 +90,7 @@ public class NotificationDAO {
 			int rows = statement.executeUpdate();
 			return (rows > 0);
 		} catch (SQLException e) {
-			throw new DAOException("Error updating notification status: " + e.getMessage());
+			throw new DAOException(e);
 		}
 	}
 	
@@ -138,8 +137,8 @@ public class NotificationDAO {
 					notifications.add(allModal);
 				}
 			}
-		} catch (SQLException e) {
-			throw new DAOException("Error in getting notifications by user ID: " + e.getMessage());
+		} catch (SQLException e) { 
+			throw new DAOException(e);
 		}
 
  		return notifications;
@@ -163,7 +162,7 @@ public class NotificationDAO {
 				}
 			}
 		} catch (SQLException e) {
-			throw new DAOException("Error in getting notifications by notification id ID: " + e.getMessage());
+			throw new DAOException(e);
 		}
 
  		return notifications;

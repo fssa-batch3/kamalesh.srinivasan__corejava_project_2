@@ -21,7 +21,6 @@ public class JobDAO {
 	    String checkIfExistsQuery = "SELECT COUNT(*) FROM job WHERE title = ? AND location = ? AND price = ? AND description = ? AND summary = ? AND qualification = ? AND responsibilities = ?";
 	    String insertQuery = "INSERT INTO job (jobid, title, location, price, description, summary, qualification, responsibilities, user_id) "
 	            + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
-
 	    try (Connection connection = ConnectionUtil.getConnection();
 	         PreparedStatement checkIfExistsStatement = connection.prepareStatement(checkIfExistsQuery);
 	         PreparedStatement insertStatement = connection.prepareStatement(insertQuery)) {
@@ -32,15 +31,13 @@ public class JobDAO {
 	        checkIfExistsStatement.setInt(3, job.getPrice());
 	        checkIfExistsStatement.setString(4, job.getDescription());
 	        checkIfExistsStatement.setString(5, job.getSummary());
-	        checkIfExistsStatement.setString(6, job.getQualification());
+	        checkIfExistsStatement.setString(6, job.getQualification()); 
 	        checkIfExistsStatement.setString(7, job.getResponsibilities());
 
 	        ResultSet resultSet = checkIfExistsStatement.executeQuery();
-	        resultSet.next();
-	        int count = resultSet.getInt(1);
-
+	       
 	        // If a record with the same data already exists, return false
-	        if (count > 0) {
+	        if (resultSet.next()) {
 	            throw new SQLException("Duplicate record");
 	        }
 
@@ -104,7 +101,6 @@ public class JobDAO {
 				job.setQualification(resultSet.getString("qualification"));
 				job.setResponsibilities(resultSet.getString("responsibilities"));
 				job.setUserId(resultSet.getInt("user_id"));
-				   String status = resultSet.getString("status");
 				job.setStatus(resultSet.getString("status"));
 				job.setCreatedDate(resultSet.getString("created_date"));
 				arr.add(job);
@@ -112,8 +108,8 @@ public class JobDAO {
 			resultSet.close();
 			return arr;
 		} catch (SQLException | IndexOutOfBoundsException e) {
-			e.printStackTrace();
-			throw new DAOException("Job Not Found");
+	
+			throw new DAOException(e);
 		}
 	}
 	
@@ -141,8 +137,7 @@ public class JobDAO {
 			resultSet.close();
 			return arr;
 		} catch (SQLException | IndexOutOfBoundsException e) {
-			e.printStackTrace();
-			throw new DAOException("Job Not Found");
+			throw new DAOException(e);
 		}
 	}
 
@@ -207,8 +202,7 @@ public class JobDAO {
 			resultSet.close();
 			return arr;
 		} catch (SQLException | IndexOutOfBoundsException e) {
-			e.printStackTrace();
-			throw new DAOException("Job Not Found");
+			throw new DAOException(e);
 		}
 	}
 	
@@ -231,12 +225,11 @@ public class JobDAO {
 				jobList.setNotification(notification);
 				jobList.setUser(user);
 				arr.add(jobList);
-			}
+			} 
 			resultSet.close();
 			return arr;
 		} catch (SQLException | IndexOutOfBoundsException e) {
-			e.printStackTrace();
-			throw new DAOException("Job Not Found");
+			throw new DAOException(e);
 		}
 	}
 }

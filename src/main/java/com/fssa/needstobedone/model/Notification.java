@@ -11,11 +11,7 @@ public class Notification {
 		// Default constructor
 	}
 
-	public Notification(int applierId, String jobId, String status) {
-		this.applierId = applierId;
-		this.jobId = jobId;
-		this.status = status;
-	}
+
 
 	// Getters and Setters
 	public int getNotificationId() {
@@ -50,9 +46,5 @@ public class Notification {
 		this.status = status;
 	}
 
-	@Override
-	public String toString() {
-		return "Notification [applierId=" + applierId + ", jobId=" + jobId + ", status=" + status + ", notificationId="
-				+ notificationId + "]";
-	}
+
 }
