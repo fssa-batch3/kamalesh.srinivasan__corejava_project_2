@@ -16,6 +16,7 @@ import com.fssa.needstobedone.model.User;
 import com.fssa.needstobedone.utils.ConnectionUtil;
 
 public class JobDAO {
+	
 
 	public boolean createJob(Job job) throws DAOException {
 	    String checkIfExistsQuery = "SELECT COUNT(*) FROM job WHERE title = ? AND location = ? AND price = ? AND description = ? AND summary = ? AND qualification = ? AND responsibilities = ?";
@@ -81,7 +82,19 @@ public class JobDAO {
 			throw new DAOException(e);
 		}
 	}
-
+	
+	static String jobId = "jobid";
+	static String title = "title";
+	static String price =  "price";
+	static String location = "locatoin";
+	static String description = "description";
+	static String summary = "summary";
+	static String qualification = = "qualification";
+	static String responsibilities = "responsibilities";
+	static String user_id = "user_id";
+	static String status = "status";
+	static String created_date = "created_date";
+    
 	public List<Job> listJobs(String id) throws DAOException {
 		List<Job> arr = new ArrayList<>();
 		String selectQuery = "SELECT * FROM job WHERE user_id = ? AND isDeleted = false";
@@ -92,17 +105,17 @@ public class JobDAO {
 			ResultSet resultSet = statement.executeQuery();
 			while (resultSet.next()) {
 				Job job = new Job();
-				job.setJobid(resultSet.getString("jobid"));
-				job.setTitle(resultSet.getString("title"));
+				job.setJobid(resultSet.getString(jobId));
+				job.setTitle(resultSet.getString(title));
 				job.setPrice(resultSet.getInt("price"));
-				job.setLocation(resultSet.getString("location"));
-				job.setDescription(resultSet.getString("description"));
-				job.setSummary(resultSet.getString("summary"));
-				job.setQualification(resultSet.getString("qualification"));
-				job.setResponsibilities(resultSet.getString("responsibilities"));
-				job.setUserId(resultSet.getInt("user_id"));
-				job.setStatus(resultSet.getString("status"));
-				job.setCreatedDate(resultSet.getString("created_date"));
+				job.setLocation(resultSet.getString(location));
+				job.setDescription(resultSet.getString(description));
+				job.setSummary(resultSet.getString(summary));
+				job.setQualification(resultSet.getString(qualification));
+				job.setResponsibilities(resultSet.getString(responsibilities));
+				job.setUserId(resultSet.getInt(user_id));
+				job.setStatus(resultSet.getString(status));
+				job.setCreatedDate(resultSet.getString(created_date));
 				arr.add(job);
 			}
 			resultSet.close();
@@ -123,15 +136,15 @@ public class JobDAO {
 			ResultSet resultSet = statement.executeQuery();
 			while (resultSet.next()) {
 				Job job = new Job();
-				job.setJobid(resultSet.getString("jobid"));
-				job.setTitle(resultSet.getString("title"));
-				job.setPrice(resultSet.getInt("price"));
-				job.setLocation(resultSet.getString("location"));
-				job.setDescription(resultSet.getString("description"));
-				job.setSummary(resultSet.getString("summary"));
-				job.setQualification(resultSet.getString("qualification"));
-				job.setResponsibilities(resultSet.getString("responsibilities"));
-				job.setUserId(resultSet.getInt("user_id"));
+				job.setJobid(resultSet.getString(jobId));
+				job.setTitle(resultSet.getString(title));
+				job.setPrice(resultSet.getInt(price));
+				job.setLocation(resultSet.getString(location));
+				job.setDescription(resultSet.getString(description));
+				job.setSummary(resultSet.getString(summary));
+				job.setQualification(resultSet.getString(qualification));
+				job.setResponsibilities(resultSet.getString(responsibilities));
+				job.setUserId(resultSet.getInt(user_id));
 				arr.add(job);
 			}
 			resultSet.close();
@@ -187,16 +200,16 @@ public class JobDAO {
 			ResultSet resultSet = statement.executeQuery();
 			while (resultSet.next()) {
 				Job job = new Job();
-				job.setJobid(resultSet.getString("jobid"));
-				job.setTitle(resultSet.getString("title"));
-				job.setPrice(resultSet.getInt("price"));
-				job.setLocation(resultSet.getString("location"));
-				job.setDescription(resultSet.getString("description"));
-				job.setSummary(resultSet.getString("summary"));
-				job.setQualification(resultSet.getString("qualification"));
-				job.setResponsibilities(resultSet.getString("responsibilities"));
-				job.setUserId(resultSet.getInt("user_id"));
-				job.setStatus(resultSet.getString("status"));
+				job.setJobid(resultSet.getString(jobId));
+				job.setTitle(resultSet.getString(title));
+				job.setPrice(resultSet.getInt(price));
+				job.setLocation(resultSet.getString(location));
+				job.setDescription(resultSet.getString(description));
+				job.setSummary(resultSet.getString(summary));
+				job.setQualification(resultSet.getString(qualification));
+				job.setResponsibilities(resultSet.getString(responsibilities));
+				job.setUserId(resultSet.getInt(user_id));
+				job.setStatus(resultSet.getString(status)); 
 				arr.add(job);
 			}
 			resultSet.close();

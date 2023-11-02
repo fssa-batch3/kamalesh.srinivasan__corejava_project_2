@@ -30,6 +30,17 @@ public class NotificationDAO {
 			throw new DAOException(e);
 		}
 	}
+	
+	static String applier_id = "applier_id";
+	static String job_id = "job_id";
+	static String status = "status";
+	static String notification_id = "notification_id";
+	static String title = "title";
+	static String description = "description";
+	static String location = "location";
+	static String firstname = "firstname";
+	static String lastname = "lastname";
+	static String email = "email";
 
 	public List<AllModal> getNotificationsByApplierId(int applierId) throws DAOException {
 		List<AllModal> notifications = new ArrayList<>();
@@ -47,22 +58,22 @@ public class NotificationDAO {
 			try (ResultSet resultSet = preparedStatement.executeQuery()) {
 				while (resultSet.next()) {
 					Notification notification = new Notification();
-					notification.setApplierId(resultSet.getInt("applier_id"));
-					notification.setJobId(resultSet.getString("job_id"));
-					notification.setStatus(resultSet.getString("status"));
-					notification.setNotificationId(resultSet.getInt("notification_id"));
+					notification.setApplierId(resultSet.getInt(applier_id));
+					notification.setJobId(resultSet.getString(job_id));
+					notification.setStatus(resultSet.getString(status));
+					notification.setNotificationId(resultSet.getInt(notification_id));
 
 					// Additional job information
 					Job job = new Job();
-					job.setTitle(resultSet.getString("title"));
-					job.setDescription(resultSet.getString("description"));
-					job.setLocation(resultSet.getString("location"));
+					job.setTitle(resultSet.getString(title));
+					job.setDescription(resultSet.getString(description));
+					job.setLocation(resultSet.getString(location));
 
 					// Additional user information
 					User user = new User();
-					user.setFirstName(resultSet.getString("firstname"));
-					user.setLastName(resultSet.getString("lastname"));
-					user.setEmail(resultSet.getString("email"));
+					user.setFirstName(resultSet.getString(firstname));
+					user.setLastName(resultSet.getString(lastname));
+					user.setEmail(resultSet.getString(email));
 
 					// Set the job and user for the notification
 					AllModal allModal = new AllModal();

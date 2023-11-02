@@ -20,7 +20,7 @@ public class TestNotificationService {
 	}
 	
 	@Test
-	public void testCreateNotificationValid() {
+	 void testCreateNotificationValid() {
 		notification.setJobId("b2674d8f-9a2d-49ab-9aed-979bf0d493b5");
 		notification.setApplierId(3);
 		notification.setStatus("Completed");
@@ -28,51 +28,51 @@ public class TestNotificationService {
 	}
 
 	@Test
-	public void testUpdateNotificationValid() {
+	 void testUpdateNotificationValid() {
 		notification.setNotificationId(10);
 		notification.setStatus("Completed");
 	    assertDoesNotThrow(() -> notificationService.updateNotification(notification));
 	}
 	@Test
-	public void testGetNotificationsByApplierIdValid() {
+	 void testGetNotificationsByApplierIdValid() {
 	    int validApplierId = 3;
 	    assertDoesNotThrow(() -> notificationService.getNotificationsByApplierId(validApplierId));
 	}
 	@Test
-	public void testGetNotificationsByUserIdValid() {
+	 void testGetNotificationsByUserIdValid() {
 	    int validUserId = 1;
 	    assertDoesNotThrow(() -> notificationService.getNotificationsByUserId(validUserId));
 	}
 	@Test
-	public void testGetNotificationsByIdValid() {
+	 void testGetNotificationsByIdValid() {
 	    int validNotificationId = 10;
 	    assertDoesNotThrow(() -> notificationService.getNotificationsById(validNotificationId));
 	}
 	@Test
-	public void testCreateNotificationInvalid() {
+	 void testCreateNotificationInvalid() {
 	    Notification invalidNotification = new Notification(/* invalid data */);
 	    assertThrows(ServiceException.class, () -> notificationService.createNotification(invalidNotification));
 	}
 
 	@Test
-	public void testUpdateNotificationInvalid() {
+	 void testUpdateNotificationInvalid() {
 	    Notification invalidNotification = new Notification();
 	    notification.setNotificationId(0);
 	    notification.setStatus(null);
 	    assertThrows(ServiceException.class, () -> notificationService.updateNotification(invalidNotification));
 	}
 	@Test
-	public void testGetNotificationsByApplierIdInvalid() {
+	 void testGetNotificationsByApplierIdInvalid() {
 	    int invalidApplierId = 54242;
 	    assertThrows(ServiceException.class, () -> notificationService.getNotificationsByApplierId(invalidApplierId));
 	}
 	@Test
-	public void testGetNotificationsByUserIdInvalid() {
+	 void testGetNotificationsByUserIdInvalid() {
 	    int invalidUserId = 234253;
 	    assertThrows(ServiceException.class, () -> notificationService.getNotificationsByUserId(invalidUserId));
 	}
 	@Test
-	public void testGetNotificationsByIdInvalid() {
+	 void testGetNotificationsByIdInvalid() {
 	    int invalidNotificationId = 45253;
 	    assertThrows(ServiceException.class, () -> notificationService.getNotificationsById(invalidNotificationId));
 	}
