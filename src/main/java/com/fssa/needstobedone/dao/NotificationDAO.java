@@ -31,10 +31,10 @@ public class NotificationDAO {
 		}
 	}
 	
-	static String applier_id = "applier_id";
-	static String job_id = "job_id";
+	static String applierId = "applier_id";
+	static String jobId = "job_id";
 	static String status = "status";
-	static String notification_id = "notification_id";
+	static String notificationId = "notification_id";
 	static String title = "title";
 	static String description = "description";
 	static String location = "location";
@@ -58,10 +58,10 @@ public class NotificationDAO {
 			try (ResultSet resultSet = preparedStatement.executeQuery()) {
 				while (resultSet.next()) {
 					Notification notification = new Notification();
-					notification.setApplierId(resultSet.getInt(applier_id));
-					notification.setJobId(resultSet.getString(job_id));
+					notification.setApplierId(resultSet.getInt(applierId));
+					notification.setJobId(resultSet.getString(jobId));
 					notification.setStatus(resultSet.getString(status));
-					notification.setNotificationId(resultSet.getInt(notification_id));
+					notification.setNotificationId(resultSet.getInt(notificationId));
 
 					// Additional job information
 					Job job = new Job();
@@ -122,10 +122,10 @@ public class NotificationDAO {
 			try (ResultSet resultSet = preparedStatement.executeQuery()) {
 				while (resultSet.next()) {
 					Notification notification = new Notification();
-					notification.setApplierId(resultSet.getInt("applier_id"));
-					notification.setJobId(resultSet.getString("job_id"));
+					notification.setApplierId(resultSet.getInt(applierId));
+					notification.setJobId(resultSet.getString(jobId));
 					notification.setStatus(resultSet.getString("status"));
-					notification.setNotificationId(resultSet.getInt("notification_id"));
+					notification.setNotificationId(resultSet.getInt("notificationId"));
 
 					// Additional job information
 					Job job = new Job();
@@ -169,7 +169,7 @@ public class NotificationDAO {
 			try (ResultSet resultSet = preparedStatement.executeQuery()) {
 				while (resultSet.next()) {
 					notifications = new Notification();
-					notifications.setJobId(resultSet.getString("job_id"));
+					notifications.setJobId(resultSet.getString(jobId));
 				}
 			}
 		} catch (SQLException e) {

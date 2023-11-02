@@ -10,7 +10,7 @@ import com.fssa.needstobedone.exception.ServiceException;
 import com.fssa.needstobedone.model.Notification;
 import com.fssa.needstobedone.services.NotificationService;
 
-public class TestNotificationService {
+ class TestNotificationService {
 	private static NotificationService notificationService;
 	private static Notification notification;
 	@BeforeEach

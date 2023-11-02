@@ -32,7 +32,7 @@ public class JobService {
 			return true;
 		} catch (DAOException | ValidationException e) {
 			throw new ServiceException(e.getMessage());
-		}
+		} 
 	}
 
 	/**
@@ -46,7 +46,7 @@ public class JobService {
 		JobDAO jobDAO = new JobDAO();
 		try {
 			List<Job> result = jobDAO.listJobsByJobId(id);
-			if(result.size() > 0) {
+			if(!result.isEmpty()) {
  			return result.get(0);
 			}else {
 				throw new ServiceException("No job found");
@@ -66,7 +66,7 @@ public class JobService {
 	public List<Job> listJobsByUserId(String id) throws ServiceException {
 		JobDAO jobDAO = new JobDAO();
 		try {
-			List<Job> result = (List<Job>) jobDAO.listJobs(id);
+			List<Job> result = jobDAO.listJobs(id);
 			if (result != null && !result.isEmpty()) {
 				return result;
 			} else {
@@ -89,7 +89,6 @@ public class JobService {
 		try {
 			jobValidator.validateJob(job);
 			if (!jobDAO.checkJobId(job.getJobid())) {
-				System.out.println(job);
 				throw new DAOException("JobId is not valid");
 			}
 			jobDAO.updateJob(job);
@@ -122,7 +121,7 @@ public class JobService {
 	public List<Job> listAllJobs() throws ServiceException {
 		JobDAO jobDAO = new JobDAO();
 		try {
-			List<Job> result = (List<Job>) jobDAO.listAllJobs();
+			List<Job> result = jobDAO.listAllJobs();
 			if (result != null && !result.isEmpty()) {
 				return result;
 			} else {
